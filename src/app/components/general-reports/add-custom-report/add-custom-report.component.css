@@ -1,0 +1,56 @@
+:host>>>.ui-steps .ui-steps-item {
+  margin: 5px 5px;
+}
+
+:host>>>.ui-steps .ui-steps-item .ui-menuitem-link {
+  padding: 5px 20px;
+}
+
+.chipsCSS {
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 16px;
+  align-items: center;
+  cursor: default;
+  min-height: 28px;
+  height: 1px;
+}
+
+:host>>>.ui-fieldset .ui-fieldset-legend {
+  box-shadow: unset;
+  background: unset;
+  width: auto;
+  margin: 0;
+  border: 0;
+  padding: 0px 10px;
+}
+
+h6 {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.btn_icon {
+  padding: 3px;
+  word-spacing: 36px;
+}
+
+.m_icon {
+  vertical-align: middle;
+  font-size: 1.5em;
+  word-spacing: 30px;
+  font-weight: 900;
+}
+
+:host(.ui-dialog-resizable .ui-dialog-content) {
+  overflow: visible !important;
+}
+
+:host(.ui-resizable-handle) {
+  display: none !important;
+}
+
+:host>>>.ui-fieldset, .ui-fieldset .ui-fieldset-legend {
+  padding: 0 1em;
+}

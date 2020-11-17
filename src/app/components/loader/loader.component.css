@@ -1,0 +1,99 @@
+.loader {
+  background: grey;
+  z-index: 1;
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.spinner {
+  width: auto;
+  height: 100%;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner>div {
+  background-color: white;
+  height: 100%;
+  width: 4%;
+  display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4)
+  }
+  20% {
+    -webkit-transform: scaleY(1.0)
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+.spinner {
+  background-color: black;
+  background-image: linear-gradient(white, white), linear-gradient(white, white), linear-gradient(white, white), linear-gradient(white, white), linear-gradient(white, white), linear-gradient(white, white), linear-gradient(white, white);
+  background-position: calc(50% - 30px) 50%, calc(50% - 20px) 50%, calc(50% - 10px) 50%, 50% 50%, calc(50% + 10px) 50%, calc(50% + 20px) 50%, calc(50% + 30px) 50%;
+  background-size: 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px;
+  background-repeat: no-repeat;
+  animation: l-bars 1s linear infinite alternate;
+}
+
+.button1 {
+  position: absolute;
+  width: 75px;
+  height: 27px;
+  top: 2px;
+  right: 67px;
+  font-size: 10px;
+  background-color: white;
+  color: black;
+  opacity: 1 !important;
+  border: 2px solid #4CAF50;
+  /* Green */
+  margin-right: 650px;
+  margin-top: 90px;
+  background-color: gainsboro;
+  z-index: 1;
+}
+
+@keyframes l-bars {
+  0% {
+    background-size: 5px 30px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px;
+  }
+  16.6% {
+    background-size: 5px 10px, 5px 40px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px;
+  }
+  33.2% {
+    background-size: 5px 10px, 5px 10px, 5px 40px, 5px 10px, 5px 10px, 5px 10px, 5px 10px;
+  }
+  49.8% {
+    background-size: 5px 10px, 5px 10px, 5px 10px, 5px 40px, 5px 10px, 5px 10px, 5px 10px;
+  }
+  66.4% {
+    background-size: 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 40px, 5px 10px, 5px 10px;
+  }
+  83% {
+    background-size: 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 40px, 5px 10px;
+  }
+  100% {
+    background-size: 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 10px, 5px 40px;
+  }
+}

@@ -1,0 +1,80 @@
+:host>>>.ui-g {
+  display: block;
+}
+
+.p-justify-even {
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.pbtn {
+  padding: 1px 6px;
+  border: 1px solid #9E9E9E;
+}
+
+:host>>>.ui-radiobutton-label {
+  vertical-align: middle !important;
+  font-weight: 500 !important;
+  margin-bottom: 0px !important;
+}
+
+:host>>>.ui-fieldset {
+  padding: 0.7em 0px !important;
+}
+
+:host>>>.ui-fieldset .ui-fieldset-legend {
+  border-radius: 0px !important;
+  padding: 0.7em !important;
+  font-size: inherit !important;
+  border-radius: 0px !important;
+  border: none !important;
+  margin-bottom: 0px !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3) !important;
+  width: -webkit-fill-available;
+}
+
+:host>>>.ui-fieldset-content {
+  padding: 0px 10px 10px 10px !important;
+  height: 92vh;
+  overflow: auto;
+}
+
+.ui-toolbar-group-left {
+  float: left !important;
+}
+
+.ui-toolbar-group-right {
+  float: right !important;
+}
+
+chart {
+  width: 100%;
+  display: block;
+}
+
+#menu-button {
+  z-index: 2;
+  height: 24px;
+  width: 23px;
+}
+
+:host>>>.ui-table .ui-table-thead>tr>th, .ui-table .ui-table-tbody>tr>td, .ui-table .ui-table-tfoot>tr>td {
+  overflow: hidden;
+}
+
+:host>>>.ui-table-caption, .ui-table-summary {
+  text-align: unset;
+}
+
+:host>>>.ui-button-icon-only .ui-button-icon-left {
+  font-size: 18px;
+}
+
+:host>>>label {
+  margin-bottom: 0;
+}

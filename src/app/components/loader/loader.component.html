@@ -1,0 +1,10 @@
+<div [style.height]='h' [style.width]='w' [style.top]='top' [class.hide]='busy==false' [class.show]='busy==true'
+  [style.opacity]='opacity' [style.position]='position' [ngStyle]="{'z-index': z_index}">
+  <div class="spinner">
+  </div>
+</div>
+<div class="button1" *ngIf='!chkButton'>
+  <span style="margin-left:15px;margin-top: 10px;font-size:12px;">Exit</span>
+  <span style="margin-left:15px;margin-top: 10px;"> <i class='fa fa-pause' (click)='exitLoop()'
+      style="margin-top:10px;font-size:10px;" style='font-size : 10px;'></i></span>
+</div>

@@ -1,0 +1,141 @@
+<p-fieldset *ngIf="selectedCRQ !== null">
+  <p-header style="font-size: inherit;">
+    <div class="p-grid p-justify-even">
+      <form [formGroup]="generalReportForm" (ngSubmit)="onSubmit(generalReportForm.value)">
+        <div class="ui-toolbar-group-left">
+          <button pButton type="button" [icon]="opened ?'fa fa-angle-left':'fa fa-angle-right'" id="menu-button"
+            (click)="showHideSidebar(!opened)" [title]="opened ?'close sidebar':'open sidebar'"
+            [ngStyle]="{'left.px':opened ?'-22':'-3'}"></button>
+
+          <p-radioButton name="timefilter" formControlName="_timefilter" value='true' checked label="Last">
+          </p-radioButton>&nbsp;
+
+          <input (keypress)="numberOnly($event)" type="text" pInputText
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'true'" formControlName="lastValue"
+            style="width: 26px;" />
+          <input disabled (keypress)="numberOnly($event)" type="text" pInputText
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'false'" formControlName="lastValue"
+            style="width: 26px;" />&nbsp;
+
+          <p-dropdown [options]="lastSelect" *ngIf="generalReportForm.controls['_timefilter'].value == 'true'"
+            formControlName="lastSelect" [disabled]=false></p-dropdown>
+          <p-dropdown [options]="lastSelect" *ngIf="generalReportForm.controls['_timefilter'].value == 'false'"
+            [disabled]=true formControlName="lastSelect"></p-dropdown>&nbsp;
+
+          <p-radioButton name="timefilter" formControlName="_timefilter" value="false" label="Start Date">
+          </p-radioButton>&nbsp;
+
+          <p-calendar [showTime]="true" formControlName='stime' hour='00' minute='00' hourFormat="24"
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'true'" [disabled]=true [maxDate]='maxDate'>
+          </p-calendar>
+          <p-calendar [showTime]="true" formControlName='stime' hour='00' minute='00' hourFormat="24"
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'false'" [disabled]=false [maxDate]='maxDate'>
+          </p-calendar>&nbsp;
+
+          <label>End Date</label>&nbsp;
+          <p-calendar [showTime]="true" formControlName='etime' hour='23' minute='59' hourFormat="24"
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'true'" [disabled]=true [maxDate]='maxDate'>&nbsp;
+          </p-calendar>
+          <p-calendar [showTime]="true" formControlName='etime' hour='23' minute='59' hourFormat="24"
+            *ngIf="generalReportForm.controls['_timefilter'].value == 'false'" [disabled]=false [maxDate]='maxDate'>
+          </p-calendar>&nbsp;
+
+          <p-dropdown [options]="bucketize" formControlName="bucketize"></p-dropdown>&nbsp;
+
+          <p-dropdown [options]="channel" formControlName="channel"></p-dropdown>&nbsp;
+          <button pButton type="submit" label="Run" class="ui-button-raised ui-button-info"
+            style="vertical-align: middle"></button>
+
+        </div>
+
+      </form>
+    </div>
+  </p-header>
+  <h5 id="grHeading" style="text-align: center;margin: 0px;" *ngIf="selectedCRQ != null">
+    {{selectedCRQ.name}}
+  </h5>
+  <h6 id="grBody" style="text-align: center;font-weight: 200;margin-top:5px;margin-bottom: 5px;"
+    *ngIf="startTime != '' && endTime != '' ">
+    Duration : {{startTime + ' To ' + endTime}}
+  </h6>
+
+  <hr style="margin-top: 5px; margin-bottom: 5px;">
+
+  <!-- Loader -->
+  <app-loader [busy]='selectedCRQData == null' *ngIf="showLoader" [position]="'relative'">
+  </app-loader>
+
+  <div id="hideTableGraph">
+    <div style="float: left ; z-index: 2" *ngIf="tableData.length > 0">
+      <p-dropdown [options]="topFilter" [(ngModel)]="_topFilter" (onChange)="onTopValueChange($event.value)">
+      </p-dropdown>
+      &nbsp;
+      <input type="text" pInputText style="width: 26px;" (keypress)="numberOnly($event)" [(ngModel)]="_filterCount"
+        (blur)="_showPieChart == true?showPieChart(): showColumnChart()" />&nbsp;
+      <p-dropdown [options]="filterGraph" [(ngModel)]="_filterGraph" (onChange)="onFilterValueChange($event)">
+      </p-dropdown>&nbsp;
+    </div>
+    <div style="float: right;z-index: 2" *ngIf="tableData.length > 0">
+      <a class="fa fa-pie-chart" style="font-size: 25px;cursor: pointer;text-decoration: none;" title="Create Pie Chart"
+        (click)="showPieChart()"></a>&nbsp;&nbsp;
+      <a class="fa fa-bar-chart" style="font-size: 25px;cursor: pointer;text-decoration: none;" title="Create Bar Chart"
+        (click)="showColumnChart()"></a>
+    </div>
+
+    <!-- chart starts -->
+
+    <div #charts></div>
+    <hr style="margin-top: 5px; margin-bottom: 5px;">
+
+
+    <p-table [columns]="selectedColumns" [value]="tableData" #dt id="myTable" *ngIf="tableData.length > 0" [rows]="15"
+      [paginator]="paginator" [resizableColumns]="true" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} rows">
+      <ng-template pTemplate="caption">
+        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+          selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns">
+        </p-multiSelect>
+
+        <span style="float: right;">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="30" placeholder="Global Filter"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">&nbsp;
+
+          <button pButton type="button" icon="pi pi-download" label=" Excel" class="btnClass"
+            (click)="tableToExcel()"></button>
+          <button pButton type="button" icon="pi pi-download" label=" CSV" class="btnClass"
+            (click)="dt.exportCSV()"></button>
+
+        </span>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" class="ui-resizable-column"
+            [ngStyle]="{'text-align':isNumber(rowData[col.field])?'right':'null'}">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" let-columns>
+        <tr>
+          <td *ngFor="let col of columns" [ngStyle]="{'text-align':isNumber(tableFooter[col.header])?'right':'null'}">
+            {{tableFooter[col.header]}}
+          </td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="summary">
+        There are {{cars?.length}} cars
+      </ng-template> -->
+    </p-table>
+
+  </div>
+
+</p-fieldset>

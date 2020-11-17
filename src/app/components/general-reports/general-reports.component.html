@@ -1,0 +1,34 @@
+<div class="mysidenav" *ngIf="opened">
+  <p-accordion class="accordHeader" [multiple]="true">
+    <p-accordionTab header="Standard Reports" [selected]="true">
+      <!-- Loader -->
+      <app-loader [busy]="generalPanelItems.length == 0" [position]="'relative'" [h]="'250px'"></app-loader>
+      <p-tree [value]="generalPanelItems" selectionMode="single" (onNodeSelect)="nodeSelect($event, 'general')"
+        (mouseover)="getNodeTitle($event)" (mouseout)="removeNodeTitle()" title="{{nodeTitle}}">
+      </p-tree>
+    </p-accordionTab>
+    <p-accordionTab>
+      <p-header>
+        <span>Custom Reports</span>&nbsp;
+        <i class="material-icons" style="vertical-align: middle;font-size: 18px;" title="Create Report"
+          (click)="openWizard()">note_add</i>
+
+      </p-header>
+      <!-- Loader -->
+      <app-loader [busy]="generalPanelItems.length == 0" [position]="'relative'" [h]="'250px'"></app-loader>
+
+      <p-tree [value]="customPanelItems" selectionMode="single" [contextMenu]="cm"
+        (onNodeSelect)="nodeSelect($event, 'custom')" (onNodeContextMenuSelect)="nodeRightSelect($event)"
+        (mouseover)="getNodeTitle($event)" (mouseout)="removeNodeTitle()" title="{{nodeTitle}}">
+      </p-tree>
+      <p-contextMenu #cm [model]="contextItems" appendTo="body" id="rightClick"></p-contextMenu>
+
+    </p-accordionTab>
+  </p-accordion>
+
+</div>
+
+<div [ngClass]="opened ? 'mymain':''" id="doNothing">
+  <app-general-report-child [selectedCRQ]="selectedCRQ" (showSidebar)="showSidebar($event)">
+  </app-general-report-child>
+</div>

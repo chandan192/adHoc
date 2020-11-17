@@ -1,0 +1,1378 @@
+@charset "UTF-8";
+/*for supporting Helvetica Bold-Oblique and Courier Bold-Oblique font family in text widget*/
+
+[data-icon]:before {
+  font-family: "vusers" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="vuser-icon-"]:before, [class*=" vuser-icon-"]:before {
+  font-family: "vusers" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.vuser-icon-exit:before {
+  content: "\e001";
+}
+
+.vuser-icon-paused:before {
+  content: "\e005";
+}
+
+.vuser-icon-play:before {
+  content: "\e004";
+}
+
+.vuser-icon-refresh:before {
+  content: "\e008";
+}
+
+.vuser-icon-stoped:before {
+  content: "\e003";
+}
+
+.vuser-icon-g-exit:before {
+  content: "\e002";
+}
+
+.vuser-icon-down:before {
+  content: "\e000";
+}
+
+.vuser-icon-sync-point-1:before {
+  content: "\e009";
+}
+
+.vuser-icon-running:before {
+  content: "\e006";
+}
+
+.vuser-icon-refresh-pause:before {
+  content: "\e007";
+}
+
+.vuser-icon-refresh-resume:before {
+  content: "\e00a";
+}
+
+/* --------------------------------------- ScrollBar CSS -----------------------------------*/
+
+.scroll {
+  width: 20px;
+  height: 200px;
+  overflow: auto;
+  float: left;
+}
+
+.scroll_content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll_content::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 20px;
+}
+
+.scroll_content::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 20px;
+}
+
+/*Block UI common CSS.*/
+
+.block-ui-wrapper.block-ui-main {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.block-ui-spinner .loader {
+  border-top: 1.1em solid rgba(239, 241, 239, 0.34);
+  border-right: 1.1em solid rgba(232, 234, 231, 0.55);
+  border-bottom: 1.1em solid rgba(223, 236, 223, 0.49);
+  border-left: 1.1em solid #777b77;
+}
+
+/* Let's get this party started */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #ddd;
+  box-shadow: inset 0 0 6px #ddd;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #ddd;
+  -webkit-box-shadow: inset 0 0 6px #666;
+  box-shadow: inset 0 0 6px #ddd;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #ddd;
+}
+
+/* -------------------------------------- Common CSS for font-size ----------------------------------*/
+
+.label-font {
+  font-size: 11px;
+}
+
+/* ---------------------------------------------------- UI Grid CSS --------------------------------------------------------- */
+
+.grid {
+  position: relative;
+}
+
+.grid-item {
+  position: absolute;
+}
+
+.grid-item.moving {
+  z-index: z-index + 1;
+}
+
+.placeholder {
+  position: absolute;
+}
+
+/*  ----------------------------------------------------Prime NG Global CSS ------------------------------------------------- */
+
+body {
+  margin: 0px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  ;
+}
+
+/*Prime NG components CSS. Please don't include color here.*/
+
+/** MegaMenu and TieredMenus **/
+
+.ui-menuitem-active>.ui-submenu>div {
+  display: block !important;
+}
+
+.ui-widget .ui-widget {
+  font-size: 11px;
+}
+
+.ui-menu .ui-menuitem-link {
+  line-height: 11px;
+}
+
+.ui-menu {
+  width: 8.5em;
+}
+
+.ui-panel .ui-panel-titlebar {
+  padding: 0px;
+}
+
+.progressBarHeader .ui-dialog.ui-widget .ui-dialog-titlebar {
+  padding: 1px;
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+.dashboard-sub-menu .ui-slidemenu-backward {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dashboard-sub-menu .ui-slidemenu {
+  margin-left: 52px;
+  margin-top: 30px;
+}
+
+.dashboard-nav-panel-menu {}
+
+.dashboard-nav-panel-menu .ui-panelmenu-header>a {
+  padding: 1.25em .5em;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content {
+  font-size: 14px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem {
+  box-shadow: 0px 0px 1px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-icon {
+  font-size: 22px;
+  width: 30px;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-icon {
+  font-size: 20px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-text {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-panel {
+  box-shadow: 2px 3px 2px;
+  margin: 2px;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-menuitem-text {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-panelmenu-icon {
+  font-size: 12px;
+}
+
+.dashboard-sub-menu .ui-slidemenu-content .ui-submenu-icon {
+  margin-right: 8px;
+}
+
+.dashboard-tree-component .dashboard-tree-context-menu {
+  width: auto;
+  min-width: 180px;
+  max-width: 200px;
+}
+
+.ui-tree {
+  background: transparent;
+  border: 0px;
+  width: 100%;
+}
+
+.ui-datatable-emptymessage {
+  text-align: center;
+}
+
+.dashboard-lower-panel-table {
+  min-height: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.dashboard-lower-section .dashboard-lower-table table .ui-datatable-data tr td {
+  height: 18px;
+  padding: 2px;
+}
+
+.table-text-align-right {
+  padding-right: 2px;
+  text-align: right;
+  /*This casusing multiple issues like all data of showgraph data and lower panel data get aligned in left side.*/
+  overflow: hidden;
+}
+
+.table-text-align-left {
+  padding-left: 2px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.table-text-align-center {
+  text-align: center;
+  overflow: hidden;
+}
+
+/*  ---------------------------------------------------- Material Global CSS ------------------------------------------------- */
+
+mat-sidenav .ui-menu .ui-menu-parent .ui-menu-child {
+  max-height: 400px;
+}
+
+mat-card-title-text {
+  font-size: 14px;
+}
+
+.dashboard-tree-component .mat-tab-label {
+  min-width: 50px;
+}
+
+.dashboard-tree-search-select .mat-select-value {
+  margin-left: 5px;
+}
+
+.dashboard-tree-search-select .mat-select-arrow {
+  margin-bottom: 6px;
+}
+
+.dashboard-tree-search-select .mat-select-underline {
+  margin-bottom: 0px;
+  height: 3px;
+}
+
+mat-option {
+  height: 30px
+}
+
+.cdk-overlay-pane mat-option {
+  height: 25px;
+  overflow: hidden;
+  line-height: 25px;
+  min-width: 10px;
+  font-size: 13px;
+}
+
+/*..................Layout icons CSS............................*/
+
+[data-icon]:before {
+  font-family: "webdashboard-layout-icon" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="layout-"]:before, [class*=" layout-"]:before {
+  font-family: "webdashboard-layout-icon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.layout-3x1-graphwidget:before {
+  content: "\e000";
+}
+
+.layout-2x1-graphwidget:before {
+  content: "\e001";
+}
+
+.layout-pattern-matching:before {
+  content: "\e002";
+}
+
+.layout-reports:before {
+  content: "\e003";
+}
+
+.layout-run-command:before {
+  content: "\e004";
+}
+
+.layout-tree1:before {
+  content: "\e007";
+}
+
+.layout-tree:before {
+  content: "\e005";
+}
+
+.layout-graph-data:before {
+  content: "\e006";
+}
+
+.layout-3x3-tabularwidget:before {
+  content: "\e009";
+}
+
+.layout-6x3-graphwidget:before {
+  content: "\e00a";
+}
+
+.layout-4x4-graphwidget:before {
+  content: "\e00b";
+}
+
+.layout-5x4-graphwidget:before {
+  content: "\e00c";
+}
+
+.layout-8x4-graphwidget:before {
+  content: "\e00d";
+}
+
+.layout-default:before {
+  content: "\e00e";
+}
+
+.layout-mixedwidget-1:before {
+  content: "\e00f";
+}
+
+.layout-mixedwidget-2:before {
+  content: "\e010";
+}
+
+.layout-mixedwidget-3:before {
+  content: "\e011";
+}
+
+.layout-3x3-samplecount-datawidget:before {
+  content: "\e013";
+}
+
+.layout-3x3-min-datawidget:before {
+  content: "\e014";
+}
+
+.layout-3x3-max-datawidget:before {
+  content: "\e015";
+}
+
+.layout-3x3-avg-datawidget:before {
+  content: "\e017";
+}
+
+.layout-2x2-tabularwidget:before {
+  content: "\e018";
+}
+
+.layout-2x2-graphwidget:before {
+  content: "\e019";
+}
+
+.layout-2x1-tabularwidget:before {
+  content: "\e01a";
+}
+
+.layout-1x2-graphwidget:before {
+  content: "\e01b";
+}
+
+.layout-1x1-graphwidget:before {
+  content: "\e01c";
+}
+
+.layout-3x3-graphwidget:before {
+  content: "\e016";
+}
+
+.layout-3x3-stddev-datawidget:before {
+  content: "\e01e";
+}
+
+.layout-widget:before {
+  content: "\e01f";
+}
+
+.layout-graph-tree:before {
+  content: "\e020";
+}
+
+.layout-3x3-lastsample-datawidget:before {
+  content: "\e021";
+}
+
+.layout-custom-metrics:before {
+  content: "\e022";
+}
+
+.layout-mixedwidget-ncdefault:before {
+  content: "\e008";
+}
+
+.layout-mixedwidget-ndedefault:before {
+  content: "\e012";
+}
+
+.layout-mixedwidget-nsdefault:before {
+  content: "\e01d";
+}
+
+/*..............layout button CSS.............*/
+
+.layout-menu-bar {
+  width: 172px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.layout-scrollbar {
+  max-height: 150px;
+  min-height: 50px;
+}
+
+/*--------------- Tree Component CSS Start --------------*/
+
+.dashboard-tree-component .mat-tab-label {
+  line-height: 45px;
+  height: 40px;
+  font-size: 15px;
+  min-width: 150px;
+  font-family: Roboto, sans-serif;
+}
+
+.mat-tab-body-content .ui-menu.ui-menu-dynamic {
+  top: 220px;
+  left: 105px;
+}
+
+.ui-tree .ui-tree-container {
+  width: 110%;
+}
+
+.mat-tab-body-wrapper {
+  overflow: inherit;
+}
+
+.mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {
+  overflow: inherit;
+}
+
+.dashboard-tree-component mat-tab-body .mat-tab-body-content {
+  height: auto;
+}
+
+.ui-tree.ui-tree-selectable .ui-treenode-content {
+  padding: 3px;
+}
+
+.dashboard-tree-component .mat-select-trigger {
+  margin-left: 5px;
+  height: 23px;
+  min-width: 60px;
+  width: 30px;
+  padding-top: 7px;
+}
+
+/*Top Nav Bar.*/
+
+/* .product-nav-bar .mat-ink-bar {
+    margin-bottom: 12px;
+} */
+
+/*--------------- Tree Component CSS End --------------*/
+
+/*CSS for color picker.*/
+
+.ui-cell-data .color-picker-selector {
+  padding: 0px;
+}
+
+.ui-cell-data .color-picker-selector .md2-colorpicker-preview {
+  width: 100%;
+  border-radius: initial;
+  position: initial;
+  height: 16px;
+  border: none;
+}
+
+.ui-cell-data .md2-colorpicker-input {
+  display: none;
+}
+
+/*------------------ Start configuration css -------------*/
+
+.dashboard-setting-win-logsettingbox .mat-select-trigger {
+  min-width: 20px;
+}
+
+.dashboard-setting-win-configdropdown .ui-dropdown .ui-dropdown-trigger {
+  width: 0em;
+}
+
+.dashboard-setting-win-configdropdown .ui-dropdown {
+  margin-left: 10px;
+  border: 0px;
+}
+
+.dashboard-setting-win-configModuleName .ui-dropdown {
+  margin-left: 10px;
+  border: 0px;
+}
+
+.dashboard-setting-win-perconfigcheckbox .ui-chkbox .ui-chkbox-box {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dashboard-setting-win-graphsettingbox .ui-chkbox .ui-chkbox-box, .dashboard-setting-win-favsettingbox .ui-chkbox .ui-chkbox-box, .dashboard-setting-win-footerDiv .ui-chkbox .ui-chkbox-box, .percentileDiv .ui-chkbox .ui-chkbox-box {
+  width: 2.125em;
+  height: 2.125em;
+}
+
+.dashboard-setting-win-chechboxbuttonspace .ui-chkbox .ui-chkbox-icon {
+  padding: 5px;
+}
+
+.dashboard-setting-win-tabs .mat-tab-body.mat-tab-body-active {
+  height: 230px;
+}
+
+.dashboard-setting-win-permultiselect .ui-multiselect {
+  width: 183px;
+}
+
+.dashboard-setting-win-permultiselect .ui-multiselect-panel .ui-multiselect-items-wrapper {
+  height: 106px;
+}
+
+.dashboard-setting-win-perconfigcheckbox .ui-chkbox .ui-chkbox-icon {
+  padding-top: 0.5em;
+}
+
+.dashboard-setting-win-permultiselect .ui-multiselect .ui-multiselect-label-container {
+  height: 21px;
+}
+
+.dashboard-setting-win-perTxtcheckbox .ui-chkbox .ui-chkbox-box {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/*------------------ End configuration css -------------*/
+
+/*------------------ compare css ------------------*/
+
+.dashboard-compare-Dialog .md2-colorpicker-input {
+  border-bottom: 0px solid rgba(0, 0, 0, .12);
+}
+
+.dashboard-compare-Dialog .color-picker-selector .md2-colorpicker-value {
+  visibility: hidden;
+}
+
+.dashboard-compare-Dialog .color-clear {
+  visibility: hidden;
+}
+
+.dashboard-compare-Dialog .ui-button-text-icon-left .ui-button-text {
+  padding: 0.25em 0.25em .25em 0.75em;
+}
+
+/* calender settings for compare */
+
+.cdk-overlay-pane .md2-datepicker-header {
+  padding: 6px;
+}
+
+.md2-datepicker-header .md2-datepicker-header-year {
+  font-size: 11px;
+}
+
+.md2-datepicker-header .md2-datepicker-header-date-time {
+  font-size: 14px;
+}
+
+.cdk-overlay-pane .md2-datepicker-panel {
+  width: 206px;
+}
+
+.md2-calendar-month .md2-calendar-dates {
+  margin: 0px;
+}
+
+td .md2-calendar-day {
+  width: 25px;
+  height: 25px;
+  line-height: 26px;
+}
+
+.md2-datepicker-content .md2-datepicker-actions .md2-button {
+  margin: 0px;
+  font-size: 13px;
+}
+
+.md2-datepicker-panel .md2-datepicker-content {
+  padding-top: 227px;
+}
+
+.md2-datepicker-content .md2-datepicker-calendar {
+  height: 229px;
+}
+
+.dashboard-compare-Dialog .mat-select .mat-select-trigger {
+  font-size: 13px;
+}
+
+/*------------------- Compare Window Css ---------------*/
+
+.dashboard-lower-panel-table-cell {
+  cursor: pointer;
+}
+
+/*---------------- Start widget setting css ------------*/
+
+/*For Bug Id: 25542, improper l&f of dropdown issue*/
+
+.ui-dropdown .ui-dropdown-trigger {
+  height: 100% !important;
+}
+
+app-dashboard-open-related-metrics .ui-multiselect .ui-multiselect-trigger {
+  border-right: 1px solid gray;
+  border-top-right-radius: 2px;
+  /* margin-left: -28px; */
+  margin-right: 0px;
+  margin-top: -3px;
+  /*********New Line Added--------*/
+  background: transparent;
+  border-bottom-right-radius: 2px;
+}
+
+.my-multiselect .ui-multiselect {
+  width: 100%;
+  height: 18px;
+  border: 1px solid gray;
+}
+
+.my-multiselect-padding .ui-multiselect .ui-multiselect-label {
+  color: black;
+  font-weight: 650;
+}
+
+.my-multiselect-padding .ui-multiselect .ui-multiselect-label {
+  padding: 0px;
+}
+
+.showTabularDiv {
+  margin-top: -10px;
+}
+
+.widgetSettingFilters .mat-select-trigger {
+  min-width: 80px;
+}
+
+.widgetSettingOperations .mat-select-trigger {
+  min-width: 65px;
+}
+
+/*------------------- End widget Setting css -----------------*/
+
+/*Open Merge Css */
+
+.openMergegraphOperation .mat-select-trigger {
+  min-width: 65px;
+  padding-top: 7px;
+  width: auto;
+  /*padding-top: 7px;*/
+}
+
+.openMergeFilter .mat-select-trigger {
+  min-width: 80px;
+}
+
+.configurationWindow .mat-select-trigger {
+  min-width: 30px;
+}
+
+.dashboard-lowerPanel-multiSelect .ui-multiselect-header {
+  display: none;
+}
+
+.dashboard-lowerPanel-multiSelect .ui-multiselect .ui-multiselect-label-container {
+  display: none;
+}
+
+.dashboard-lowerPanel-multiSelect .ui-multiselect .ui-multiselect-trigger .fa {
+  padding-bottom: 2px;
+  padding-top: 6px;
+  width: 23px;
+  padding-left: 5px;
+  border-radius: 3px;
+}
+
+.dashboard-lowerPanel-multiSelect .ui-multiselect .ui-multiselect-trigger {
+  cursor: pointer;
+  width: 1.5em;
+  height: 100%;
+  position: absolute;
+  left: 7px;
+  top: -16px;
+  padding: 0px .25em;
+  z-index: 12;
+}
+
+.dashboard-open-merge-ui-g {
+  margin: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.dashboard-open-mergeDialog .mat-select-disabled .mat-select-trigger {
+  background: #f0f3f2;
+}
+
+.mat-menu-panel.mat-menu-after.mat-menu-below {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.mat-menu-panel.mat-menu-before.mat-menu-below {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/*------------------- Geo Map Extended css for Bilnking the store point-----------------*/
+
+.blinking-points {
+  animation-duration: 0.5s;
+  animation-name: blinking;
+  animation-iteration-count: 30;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes blinking {
+  0% {
+    fill: red;
+  }
+  50% {
+    fill: yellow;
+  }
+  100% {
+    fill: blue;
+  }
+}
+
+/* -------For Favorite Parameterisation and filter --------- */
+
+.favoriteParamNdFilter .mat-select-trigger {
+  color: black;
+}
+
+.dashboard-compare-Dialog .mat-dialog-title {
+  margin: 0 0 1px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.autocompleteCustomWidth input[type=text] {
+  width: 365px;
+}
+
+/* ----- For Pagination -----*/
+
+.ui-paginator {
+  padding-bottom: 8px;
+  background: transparent;
+  border-color: transparent;
+  font-size: 13px;
+}
+
+.dashboard-pagination .ui-paginator.ui-widget.ui-widget-header.ui-unselectable-text {
+  font-size: 12px;
+  padding: 0 0 4px;
+}
+
+.dashboard-pagination .ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-pages, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-current {
+  padding: 1px 3px;
+  margin: 1px;
+  display: initial;
+  border: initial;
+  border-radius: 5px;
+}
+
+.ui-paginator>a>span {
+  padding: 2px;
+}
+
+/* for Monitor up/down status */
+
+#monitorUpDownInfoDialog .ui-accordion .ui-accordion-content {
+  border: 1px solid #282828;
+  border-radius: 5px;
+}
+
+#monitorUpDownInfoDialog .ui-datatable .ui-datatable-scrollable-body {
+  max-height: 250px;
+  min-height: 240px;
+  height: 242px;
+}
+
+#monitorUpDownInfoDialog .ui-datatable-scrollable-table-wrapper {
+  overflow-x: hidden;
+}
+
+/* for Transaction-detail Unexcuted tx's table */
+
+.unExecutedTxDialog .ui-datatable .ui-datatable-scrollable-body {
+  max-height: 400px;
+  min-height: 360px;
+  height: 370px;
+  background-color: #cfe1f1
+}
+
+#widgetSettingId .mat-select-trigger {
+  width: auto;
+}
+
+/*putting css for submenus for tree.*/
+
+mat-sidenav .ui-menu .ui-menu-parent .ui-menu-child {
+  max-height: 400px;
+  min-width: 150px;
+  width: auto;
+}
+
+.ps-container:hover>.ps-scrollbar-x-rail, .ps-container:hover>.ps-scrollbar-y-rail {
+  opacity: 1;
+}
+
+.ps-container>.ps-scrollbar-y-rail, .ps-container>.ps-scrollbar-x-rail {
+  opacity: 1;
+}
+
+.section_button-download {
+  background: #252525;
+  padding: 4px;
+  border-radius: 2px;
+  color: #fff;
+  float: left;
+}
+
+.dashboard-update-user-session-rate-tab .ui-tabview .ui-tabview-panel {
+  padding: .8em;
+}
+
+.grid {
+  background-color: transparent;
+  transform-origin: top center;
+  transition: transform 0.5s;
+}
+
+.grid-item {
+  background-color: transparent;
+  -webkit-transition: width 0.25s, height 0.25s, transform 0.5s;
+  -moz-transition: width 0.25s, height 0.25s, transform 0.5s;
+  -o-transition: width 0.25s, height 0.25s, transform 0.5s;
+  transition: width 0.25s, height 0.25s, transform 0.5s;
+  overflow: hidden;
+}
+
+.grid-item:active, .grid-item.moving {
+  z-index: 2;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.grid-placeholder {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-sub-menu .ui-menu .ui-menu-parent .ui-submenu-icon {
+  float: right;
+  margin-right: 0px;
+}
+
+.sliderCustomColor .mat-slider-horizontal .mat-slider-thumb-label {
+  transform: rotate(45deg);
+  border-radius: 50% 50% 0;
+}
+
+.sliderCustomColor .mat-slider-horizontal .mat-slider-thumb {
+  transform: scale(0);
+}
+
+.sliderCustomColor .mat-slider-horizontal .mat-slider-thumb-label .mat-slider-thumb-label-text {
+  opacity: 1;
+}
+
+/*For multiple selected option in correlated graph type properties*/
+
+.dashboard-widget-setting-correlative-graph span.md2-select-value {
+  height: 22px;
+  overflow-y: hidden;
+  white-space: pre-wrap;
+}
+
+.dashboard-widget-setting-correlative-graph span.md2-select-value-text {
+  font-size: 12px
+}
+
+.dashboard-widget-setting-correlative-graph.md2-select {
+  display: block
+}
+
+/*For compare back preset input field*/
+
+.dashboard-compare-Dialog .backPresetClass .mat-input-wrapper .mat-input-flex .mat-input-infix {
+  border-top: 0em;
+}
+
+.md2select .md2-select-value-text {
+  font-size: 12px;
+}
+
+legend {
+  font-weight: 500;
+}
+
+.dashboard-lower-section .ui-datatable th.ui-state-default {
+  padding: 4px;
+  font-weight: 500;
+}
+
+fieldset {
+  border: 1px solid #e0e0e0;
+}
+
+.dashboard-open-derivedDialog1 .mat-tab-label {
+  line-height: 30px;
+  height: 32px;
+}
+
+b {
+  font-weight: 500;
+}
+
+/*----------------STYLES FOR EMAIL SMS ALERT SETTINGS------------*/
+
+.mailSmsConfigSetting .ui-fieldset .ui-fieldset-legend {
+  padding: 1em 0em 1em 0em !important;
+  background: transparent !important;
+  border: 0px solid #d5d5d5 !important;
+}
+
+.mailSmsConfigSetting .ui-fieldset-content-wrapper {
+  margin-bottom: 10px;
+}
+
+.mailSmsConfigSetting input[type=number] {
+  width: 50px;
+}
+
+.mailSmsConfigSetting .ui-multiselect-items-wrapper {
+  max-height: 85px;
+}
+
+.mailSmsConfigSetting .ui-dialog .ui-dialog-content {
+  overflow: hidden;
+}
+
+.monocoloricon .material-icons {
+  font-size: 18px;
+}
+
+.chngPassword .ui-dialog.ui-widget .ui-dialog-titlebar .ui-dialog-title {
+  font-size: 12px;
+}
+
+@-moz-document url-prefix() {
+  #favMozSupport {
+    padding-right: 25px;
+  }
+}
+
+.openrelatedgraphOperation .mat-select-trigger {
+  min-width: 112px;
+  /*padding-top: 7px;*/
+}
+
+.graphListbox /deep/ .ui-multiselect .ui-multiselect-label-container {
+  width: 294px
+}
+
+.selectGraph /deep/ .ui-multiselect.ui-widget.ui-corner-all {
+  width: 300px;
+}
+
+.openrelatedCombobox .mat-select-trigger {
+  min-width: 140px;
+  /*padding-top: 7px;*/
+}
+
+/* .dashboard-report-context-menu-item .ui-widget-content {
+    width: 101px;
+    position: absolute;
+    z-index: auto;
+} */
+
+.dashboard-report-set-table .ui-datatable table {
+  table-layout: auto;
+}
+
+.dashboard-menu-icon .ui-dialog {
+  position: absolute;
+  padding: 0;
+  margin: -16.7% 37%;
+  /* padding: 0px; */
+}
+
+.dashboard-menu-icon .ui-dialog .ui-dialog-titlebar {
+  padding: 0px !important;
+  /* padding: 0px; */
+}
+
+.dashboard-menu-icon .ui-dialog.ui-widget .ui-dialog-content {
+  padding: 0px;
+}
+
+/* for Runcommand */
+
+.body1Div2 .ui-widget-header {
+  display: inline-flex;
+}
+
+/*createScript*/
+
+.previewDialog .ui-dialog-content.ui-widget-content {
+  overflow: hidden;
+}
+
+/*For Generators Add Edit Component - Location DropDown*/
+
+.genLocDropDown .ui-dropdown-items-wrapper {
+  max-height: 75px !important;
+}
+
+/*For panel header in View File option*/
+
+.panelHeader .ui-widget-header {
+  height: 20px;
+  border-bottom: 1px #83a4c5 solid;
+  font-size: 12px;
+  background: rgba(65, 126, 191, 0.25);
+}
+
+/*-------------Vuser CSS------------*/
+
+.actionIcon {
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  line-height: 18px;
+  padding: 2px 4px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+.vuserListIcon {
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  line-height: 18px;
+  padding: 2px 3px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+.vuser-toolbar .ui-widget-header {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 3px;
+}
+
+.totalVuserList {
+  width: auto;
+  margin-left: 5px;
+  padding: 2px
+}
+
+.disabledIcon {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/*-------------Favorite menu CSS------------*/
+
+.dashboard-sub-menu .ui-slidemenu {
+  z-index: 1005;
+  top: 229.5px;
+  left: 0px;
+  transform: translateY(0px);
+  opacity: 1;
+  width: 200px;
+}
+
+.ui-slidemenu .ui-slidemenu-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  /* width: 200px;*/
+  width: 200px;
+}
+
+.dashboard-pagination .ui-datatable.ui-widget.ui-datatable-reflow.ui-datatable-resizable.ui-datatable-scrollable {
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  padding-right: 16px;
+  box-sizing: content-box;
+}
+
+mat-sidenav.dashboard-sidenav .ui-tieredmenu {
+  width: 100%
+}
+
+dashboard-panel-header .mat-menu-panel .ui-state-default a:link {
+  padding: .05em 0.5em;
+  display: block;
+}
+
+/* for focus outline box */
+
+.ui-treenode-content-selected:focus, .ui-unselectable-text:focus, .ui-treenode-selectable:focus {
+  outline: none;
+}
+
+/* for pagination */
+
+/*.dashboard-lower-table .ui-datatable-resizable{overflow: unset;}  */
+
+/* for favorite menu */
+
+.mySubmenu .ui-slidemenu .ui-menuitem {
+  width: 95%;
+}
+
+.mySubmenu #favoriteSlideMenu {
+  height: 285px !important;
+}
+
+.mySubmenu .ui-slidemenu-rootlist>li:nth-child(1) {
+  border-bottom: solid 1px #FFF;
+  ;
+  border-radius: 0px;
+}
+
+.mySubmenu .ui-slidemenu-rootlist>li:nth-child(3) {
+  border-bottom: solid 1px #FFF;
+  ;
+  border-radius: 0px;
+}
+
+.mySubmenu .ui-slidemenu .ui-menuitem-link .ui-submenu-icon {
+  right: -8px;
+}
+
+.mySubmenu1 .ui-slidemenu-rootlist>li:nth-child(1) {
+  border-bottom: solid 1px #FFF;
+  ;
+  border-radius: 0px;
+}
+
+.mySubmenu1 .ui-slidemenu-rootlist>li:nth-child(3) {
+  border-bottom: solid 1px #FFF;
+  ;
+  border-radius: 0px;
+}
+
+.dashboard-sidenav-content.mat-drawer-content {
+  z-index: -1;
+}
+
+/* for color-picker */
+
+/* for layout selection */
+
+.layoutNotFocus, .layoutFocus {
+  width: 33.333%;
+  float: left;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+/* for page-breaker widget */
+
+/*.dashboard-page-breaker {height: 12px; width: calc(100% - 6px);}*/
+
+.dashboard-page-breaker {
+  height: 23px !important;
+  width: calc(100% - 6px) !important;
+}
+
+.dashboard-page-breaker .closeIconForLine, .dashboard-page-breaker .dragIconCss {
+  font-size: 7px;
+}
+
+/* for top panel spinner */
+
+mat-spinner {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+mat-spinner svg {
+  width: 30px !important;
+  height: 30px !important;
+  margin-top: 5px !important;
+}
+
+.mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode=indeterminate] {
+  animation: none !important
+}
+
+/* --------Need to Remove once Done in Custom JS*, For layout Selection No impact on any other component---------*/
+
+.layoutcustom {
+  float: left;
+  height: 48px;
+}
+
+/* for color-picker css */
+
+.colorpickermain {
+  cursor: pointer;
+  text-indent: 100%;
+  width: 100%;
+  border: 0;
+}
+
+.standardTree .ui-tree .ui-tree-container {
+  overflow: inherit
+}
+
+.openMergegraphOperation .mat-select {
+  width: auto;
+}
+
+span.ui-radiobutton-icon.fa.fa-circle {
+  font-size: 9px;
+  line-height: 10px;
+}
+
+app-generic-event-viewer .ui-datatable thead tr {
+  height: 2.5em;
+}
+
+.ui-widget-overlay {
+  opacity: 0.2 !important;
+}
+
+.total-padding, .scrollable-content {
+  will-change: scroll-position;
+  will-change: transform;
+}
+
+.scrollable-content {
+  will-change: contents;
+}

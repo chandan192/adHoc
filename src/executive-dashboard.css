@@ -1,0 +1,1444 @@
+/*-----------------------------Fonts-------------------------------*/
+
+@charset "UTF-8";
+.apply_btn .ui-button-text.ui-clickable {
+  float: right;
+}
+
+[data-icon]:before {
+  font-family: "kpi-icon" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="kpi-"]:before, [class*=" kpi-"]:before {
+  font-family: "kpi-icon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*search icon css*/
+
+.search-node-drp .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c11-5.ui-dropdown-panel.ui-widget.ui-widget-content.ui-corner-all.ui-shadow.ng-star-inserted {
+  max-width: 200px;
+  left: unset !important;
+}
+
+.kpi-cpu:before {
+  content: "\e001";
+}
+
+.kpi-csc:before {
+  content: "\e002";
+}
+
+.kpi-data-center:before {
+  content: "\e003";
+}
+
+.kpi-db:before {
+  content: "\e004";
+}
+
+.kpi-ed:before {
+  content: "\e005";
+}
+
+.kpi-g-kpi:before {
+  content: "\e006";
+}
+
+.kpi-g-kpi2:before {
+  content: "\e007";
+}
+
+.kpi-g-kpi3:before {
+  content: "\e008";
+}
+
+.kpi-inventory-grid:before {
+  content: "\e009";
+}
+
+.kpi-iphone:before {
+  content: "\e00a";
+}
+
+.kpi-kiosk:before {
+  content: "\e00b";
+}
+
+.kpi-kpi:before {
+  content: "\e00c";
+}
+
+.kpi-mcom:before {
+  content: "\e00d";
+}
+
+.kpi-offer-grid:before {
+  content: "\e00e";
+}
+
+.kpi-pvs:before {
+  content: "\e00f";
+}
+
+.kpi-response-time:before {
+  content: "\e010";
+}
+
+.kpi-store-map:before {
+  content: "\e011";
+}
+
+.kpi-tablet:before {
+  content: "\e012";
+}
+
+.kpi-tier:before {
+  content: "\e013";
+}
+
+.kpi-total-kohls:before {
+  content: "\e014";
+}
+
+.kpi-total-mobile:before {
+  content: "\e015";
+}
+
+.kpicon {
+  height: 18px;
+  margin: 0;
+  padding-top: 2px;
+  overflow: hidden;
+  float: left;
+  font-size: 1.5em;
+}
+
+.topicon {
+  margin-top: 4px;
+  overflow: hidden;
+  float: left;
+  font-size: 2.0em;
+}
+
+.storeicon {
+  margin-top: 0px;
+  font-size: 1.6em;
+}
+
+.edCross.top-panel-nav-cross-icon {
+  /* left: 0 !important;
+    float: right;
+    top:10px !important;
+  */
+}
+
+.ed-table .ui-datatable .ui-datatable-thead>tr>th {
+  padding: 0;
+  line-height: 22px;
+}
+
+/*-----------------------------ED CSS------------------------------*/
+
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');*/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap');
+body {
+  /* font-family: 'Roboto', sans-serif !important; */
+  font-family: 'Poppins', sans-serif !important;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+}
+
+.ed-table .ui-datatable .ui-datatable-thead>tr>th {
+  font-size: 11px;
+  font-weight: 500;
+  padding-left: 4px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.edtable .ui-datatable th.ui-state-default {
+  word-wrap: break-word;
+}
+
+.ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+  border: 0;
+  padding: 6px 0 0;
+  border-radius: 0;
+  height: 30px;
+}
+
+.ed-kpi {
+  display: inline-block;
+  margin: 4px 2px 2px;
+  padding: 2px;
+  height: 90vh;
+  overflow-y: auto;
+  border-radius: 4px;
+}
+
+.timeLabel {
+  margin-right: 5px;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.sampleTimeClass {
+  font-weight: 500;
+}
+
+.loadingClass {
+  color: #000;
+  z-index: 100;
+}
+
+.ed-table .ui-widget-header span.ui-rowgroup-header-name {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.kpi_pvs_pky_data {
+  word-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi_pvs_scs_data {
+  word-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.graphtimeClass .ui-state-disabled, .ui-widget:disabled {
+  opacity: 1.0;
+}
+
+.timePeriodDrpClass .ui-dropdown-panel .ui-dropdown-item:not(.ui-state-highlight):hover {
+  background: #C1C1C1 !important;
+}
+
+.edSinglePanelPopup .ui-dialog.ui-widget .ui-dialog-content {
+  padding: 0;
+}
+
+.graphicalHandle {
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  z-index: 1;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.graphicalHandle:hover {
+  font-size: xx-large;
+}
+
+.gKpiLoadingIcon {
+  position: absolute;
+  top: 45%;
+  left: 48%;
+  color: white;
+}
+
+/*------------------ ED Store----------------*/
+
+.ed-box {
+  margin: 6px 4px;
+  min-height: 80vh;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.storePanel {
+  height: 99vh;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.storePanel .ui-panel.ui-widget .ui-panel-titlebar.ui-corner-all {
+  padding: 2px;
+}
+
+.labelClass {
+  font-size: 11px;
+  padding: 2px 10px 0 5px;
+  font-weight: 500;
+}
+
+.storePanel .ui-panel .ui-panel-content {
+  height: 88vh;
+  border-top: 0;
+  overflow-y: auto;
+}
+
+.geoMapDivClass .ui-datatable th.ui-state-default {
+  padding: 7px;
+}
+
+#appContainer {
+  width: 20em;
+  margin-top: 1%;
+  margin-left: 25px;
+  display: inline-block;
+  border: 2px solid;
+  padding: 1%;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.datalabel {
+  float: right;
+  cursor: pointer;
+}
+
+.appLabel {
+  position: absolute;
+  font-size: 1.8em;
+  margin-top: 4px;
+  padding-left: 10px;
+  width: 163px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appHeader {}
+
+.app-label {
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.app-body {
+  padding: 0 10px 0 10px;
+}
+
+/* .app-body,.app-data {
+    margin-top: 7%;
+} */
+
+.app-data {
+  margin: 0 0% 0 2%;
+}
+
+/* .app-data {
+    margin-top: 7%;
+} */
+
+.app-img {
+  width: 18%;
+}
+
+.legendClass {}
+
+.divClass {
+  border: 1px solid #5a5a5a;
+  border-radius: 5px;
+  padding: 3px;
+  display: inline-block;
+  width: 100%;
+}
+
+.divMap {
+  height: 100%;
+  display: inline-block;
+  width: 66%;
+}
+
+.divTable {
+  display: inline-block;
+  width: 33%;
+  height: auto;
+  position: absolute;
+  max-height: 50%;
+  /* overflow: auto;
+  overflow-y: scroll;*/
+}
+
+.labelClass {
+  bottom: 4px;
+  position: relative;
+}
+
+.labelClass-titilebar {
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0 4px 0 8px;
+}
+
+.store-table {
+  padding-top: 5px;
+}
+
+.store-table th {
+  padding: 6px;
+}
+
+.store-table td {
+  text-align: left;
+  padding: 4px;
+  max-width: 355px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.store-table .iconClass {
+  font-size: 14px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.store-map-setting {
+  margin: 0 8px;
+}
+
+.storeloadingIcon {
+  position: absolute;
+  top: 45%;
+  left: 48%;
+  color: black;
+}
+
+.geoMapDivClass .ui-datatable .ui-datatable-data>tr>td {
+  padding: 6px;
+}
+
+/*for kpi bug, accorian not visible*/
+
+.kpigrid .ui-datatable-header.ui-widget-header {
+  padding: 6px 0px 18px 5px;
+}
+
+/*for stat type accorian*/
+
+.kpigrid_stat .ui-datatable-header.ui-widget-header {
+  padding: 6px 0px 18px 5px;
+}
+
+/*for handling planned field in order revenue*/
+
+.tierNamecss {
+  width: 150px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* for overlay in top 10 transaction */
+
+.overlay-metrices .ui-overlaypanel {
+  padding: 0;
+  margin: 0;
+  left: 77% !important;
+  position: absolute;
+  /* width: 173px; */
+}
+
+/* table inside overlay*/
+
+.overlayTable .ui-datatable {
+  margin-bottom: 1%;
+  width: 255px;
+}
+
+.geo-metrices .ui-datatable th.ui-state-default {
+  padding: 0px;
+  /* display: none; */
+}
+
+/*For KPI stat tables*/
+
+.kpigrid_stat .ui-datatable th.ui-state-default {
+  font-weight: 500;
+  padding: 3px;
+}
+
+/* .multi-select-store-view .ui-multiselect-panel.ui-widget.ui-widget-content {
+    margin-left: -72px;
+}
+
+.multi-select-store-view .ui-multiselect-trigger.ui-state-default {
+    border-radius: 3px;
+}
+
+.multi-select-store-view .ui-multiselect.ui-widget.ui-state-default {
+    width: 0px;
+    display: inline-flex;
+    margin-left: 13px;
+} */
+
+/*--------------------Responsive New CSS for Login-----------------*/
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+/* Portrait */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2)and (orientation: portrait) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 20px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 43vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 25vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 66px;
+  }
+}
+
+/* Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2)and (orientation: landscape) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 23px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 60vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 20vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 40px;
+  }
+}
+
+/*--------------Iphone X-----------------------------------------*/
+
+/* Portrait */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: portrait) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 20px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 43vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 25vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 66px;
+  }
+}
+
+/* Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: landscape) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 23px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 60vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 20vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 40px;
+  }
+}
+
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+
+/* Portrait */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) and (orientation: portrait) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 20px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 43vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 25vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 66px;
+  }
+}
+
+/* Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) and (orientation: landscape) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-thead>tr>th, .kpigrid_stat .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+    padding: 2px !important;
+  }
+  .kpigrid .ui-datatable .ui-datatable-data>tr>td, .kpigrid_stat .ui-datatable .ui-datatable-data>tr>td {
+    font-size: 23px;
+  }
+  .kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+    width: 60vw !important;
+  }
+  .kpi_multi_res.ui-state-default.ui-unselectable-text, .kpi_multi_cpu.ui-state-default.ui-unselectable-text {
+    width: 20vw !important;
+  }
+  .kpi_tier_name.ui-state-default.ui-unselectable-text {
+    width: 7vw !important;
+  }
+  .revenue-table .ui-datatable .ui-datatable-data>tr>td, .revenue-table .ui-datatable .ui-datatable-thead>tr>th, .ed-table .ui-datatable .ui-datatable-data>tr>td, .ed-table .ui-datatable .ui-datatable-thead>tr>th {
+    font-size: 23px;
+  }
+  /*for kpi bug, accorian not visible*/
+  .kpigrid .ui-datatable-header.ui-widget-header, .kpigrid_stat .ui-datatable-header.ui-widget-header {
+    padding: 4px 0px 27px 9px;
+    font-size: 21px;
+  }
+  .timeLabel {
+    color: #111112;
+    font-size: 23px;
+  }
+  .ed-toolbar .ui-toolbar.ui-widget.ui-widget-header {
+    font-size: 23px;
+    height: 40px;
+  }
+}
+
+@media only screen and (min-device-width: 1035px) {
+  .kpigrid .ui-datatable table {
+    table-layout: auto !important;
+  }
+}
+
+.kpi_multi_pvs.ui-state-default.ui-unselectable-text {
+  width: 115vh;
+}
+
+/* Tier Status Css */
+
+.tierStatus {
+  /* margin: 10px 6px;
+    border-radius: 4px;
+   */
+}
+
+.panel-rightClass {
+  padding: 4px 4px 4px;
+}
+
+/* tier status time period button */
+
+.btn-time-period.mat-raised-button.mat-primary {
+  font-size: 11px;
+  height: 85%;
+}
+
+.dc-dropdown.mat-form-field {
+  width: 66px;
+}
+
+/* toolbar for time period*/
+
+.tier-status-top .mat-toolbar-multiple-rows {
+  min-height: 6vh;
+}
+
+.tier-status-top .mat-toolbar-row {
+  height: 6vh;
+}
+
+.tier-status-left {
+  display: inline-block;
+  /* width:79%;
+    min-height: 78vh; */
+  width: 80%;
+  min-height: 84vh;
+  transition: width .5s ease-in;
+  -webkit-transition: width .5s ease-in;
+}
+
+.tier-status-left-full {
+  width: 100%;
+  transition: width .5s ease-in;
+  -webkit-transition: width .5s ease-in;
+}
+
+.tier-status-right {
+  animation: cssAnimation .5s ease-in;
+  -webkit-animation: cssAnimation .5s ease-in;
+  float: right;
+  width: 20%;
+}
+
+@keyframes cssAnimation {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  90% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 1;
+    display: inherit;
+  }
+}
+
+@-webkit-keyframes cssAnimation {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  90% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 1;
+    display: inherit;
+  }
+}
+
+.tier-status-right-hide {
+  display: none;
+}
+
+.tier-status-right-none {
+  display: none;
+}
+
+.tier-status-widget {
+  width: 100%;
+  margin: 2px 0;
+  line-height: 2.5em;
+}
+
+.show-dashoard-btn {
+  padding: 0 8px;
+}
+
+.tierStatusPanel {
+  /* height: 85vh;*/
+  padding: .25em;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.tierStatusPanel .ui-panel.ui-widget .ui-panel-titlebar.ui-corner-all {
+  padding: 3px 0px 3px;
+  margin: 0 0.5px;
+  border-bottom-color: white;
+  height: 26px;
+}
+
+.tierStatusPanel .ui-panel .ui-panel-content {
+  height: 90vh;
+  border-top: 0;
+  /*  overflow-y: auto;*/
+}
+
+.ts-left-panel .ui-panel .ui-panel-content {
+  height: 79.6vh;
+  padding: 1px;
+  /*  margin: 2px;*/
+}
+
+.tierStatusDCs .ui-multiselect-panel {
+  padding: .2em;
+  position: absolute;
+  min-width: 12em;
+}
+
+/* .ts-health{
+    height: 43vh;
+} */
+
+.score-card-table {
+  width: 100%;
+  height: 18vh;
+}
+
+.score-card-table td {
+  border: none;
+}
+
+/* JSPLUMB */
+
+/* You can add global styles to this file, and also import other style files */
+
+/* ------------------------ dialogs ----------------------------*/
+
+/* ----------------------- drag/drop interactions -------------- */
+
+.drop-hover {
+  background-color: #FCCCCC !important;
+}
+
+.jtk-surface {
+  height: 79vh;
+  /*height: -webkit-fill-available;*/
+}
+
+jsplumb-demo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+jsplumb-flowchart {
+  width: 100%;
+  display: flex;
+}
+
+jsplumb-surface {
+  flex: 1;
+}
+
+jsplumb-surface>div {
+  width: 100% !important;
+  /* height:100% !important; */
+}
+
+jsplumb-controls {
+  /* left: 200px; */
+  position: absolute;
+  color: white;
+  top: 80px;
+  z-index: 1;
+}
+
+.controls {
+  position: static;
+}
+
+/* ----------------------- node styles ------------------------- */
+
+.flowchart-object {
+  position: absolute;
+  text-align: center;
+  font-size: 11px;
+  /* opacity: 0.8; */
+  z-index: 10;
+  background: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  min-width: 0;
+  min-height: 0;
+  cursor: pointer;
+}
+
+.flowchart-object .node-action {
+  display: none;
+  position: absolute;
+  top: 24px;
+  cursor: pointer;
+  color: white;
+  z-index: 10000;
+}
+
+.flowchart-object .node-action:hover {
+  color: #ff8000;
+}
+
+.flowchart-object .node-edit {
+  left: 50%;
+  margin-left: -20px;
+}
+
+.flowchart-object .node-delete {
+  left: 50%;
+  margin-left: 10px;
+}
+
+.flowchart-object.jtk-surface-selected-element .node-action {
+  display: block;
+}
+
+.outer {
+  stroke: #1F9223;
+  stroke-width: 0.25em;
+  cursor: pointer;
+}
+
+.middle {
+  stroke: #1F9223;
+  stroke-width: 0.12em;
+  cursor: pointer;
+}
+
+.inner {
+  cursor: move !important;
+}
+
+.ipClass {
+  /* stroke:#4169E1; */
+  stroke-width: 0.13em;
+}
+
+.tierbox {
+  stroke: #1F9223;
+  stroke-width: 0.1em;
+  cursor: pointer;
+}
+
+.textClass {
+  fill: #000 !important;
+}
+
+.flowchart-object:hover .outer {
+  /* opacity:0.7; */
+}
+
+.jtk-miniview {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 100;
+}
+
+.overlayLabel {
+  background-color: #EBF6FD;
+  padding: 2px;
+  font: 11px Arial, Helvetica, sans-serif;
+  /**color: #444;*/
+  border-radius: 5px;
+  opacity: 0.8;
+  cursor: pointer;
+  position: absolute;
+  white-space: nowrap;
+}
+
+/*for right panel headings*/
+
+.ts-right-headings {
+  font-size: 12px;
+  font-weight: 500;
+  padding-left: 3px;
+  color: #5d5d5d;
+}
+
+.ts-alert-Panel {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ts-alert-Panel .ui-panel.ui-widget .ui-panel-titlebar.ui-corner-all {
+  padding: 2px;
+  background: #2d3c52 !important;
+  color: white !important;
+}
+
+.ts-alert-Panel .ui-panel .ui-panel-content {
+  border-top: 0;
+  height: 62vh;
+  overflow-y: auto;
+}
+
+/* css to show clickable link when subject having some value*/
+
+.lblLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* css for hover on context menu in tier status*/
+
+.contextClass .ui-menu .ui-menuitem-link:hover {
+  background: #007BB9;
+}
+
+.contextClass .ui-menu .ui-menu-child {
+  background: #fff;
+  width: 28vh;
+}
+
+/*handling picklist css*/
+
+.config-ts-picklist .ui-picklist-item {
+  border-radius: 2px;
+  word-wrap: normal;
+  /*    white-space: nowrap; */
+  /*     width: 300px; */
+  text-overflow: ellipsis !important;
+}
+
+.config-ts-picklist .ui-picklist-item:hover {
+  background: #2399e5;
+  box-shadow: 5px 2px 5px black;
+}
+
+.uploadTsImg .ui-fileupload {
+  width: 90vh
+}
+
+/*on hover of each element*/
+
+/*  //Commenting temporary
+.flowchart-object:hover{
+    box-shadow: 5px 5px 45px 5px grey;
+    background: transparent;
+}
+
+
+.output-node.flowchart-object:hover {
+    border-radius: 50%;
+}
+*/
+
+.output-node.flowchart-object svg {
+  margin-top: -4px;
+  margin-left: -2px;
+}
+
+.jms-entity {
+  stroke-dasharray: 5px;
+}
+
+/*--------------------------ED Tier Status---------------------------*/
+
+.ts-left-panel .ui-widget-content {
+  border: 0px solid #D5D5D5;
+  width: auto;
+}
+
+.ts-alert-top {
+  margin: 2% 4% 0;
+}
+
+.sampleTimeLabel {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 900px;
+  display: inline-flex;
+}
+
+.contextClass .ui-contextmenu .ui-widget .ui-widget-content .ui-corner-all .ui-shadow {
+  width: auto;
+}
+
+.dropDownFlowMap .ui-dropdown-panel .ui-dropdown-items-wrapper {
+  background: white;
+}
+
+.ui-toolbar-group-right {
+  margin-top: -1px;
+}
+
+/*-------------------------Tier Status Alert-------------------------*/
+
+.ts-alert-main {
+  height: 13vh;
+  width: 100%;
+  border: .5px solid black;
+  border-left: none;
+  border-right: none;
+}
+
+.ts-alert-crit {
+  background: #FF0000;
+}
+
+.ts-alert-maj {
+  background: #F69606;
+}
+
+.ts-alert-min {
+  background: #FFE135;
+}
+
+.dot1, .dot2, .dot3 {
+  font-size: 11px;
+  margin-left: -3px;
+}
+
+.dot1 {
+  color: #FF0000;
+}
+
+.dot2 {
+  color: #F69606;
+}
+
+.dot3 {
+  color: #FFE135;
+}
+
+.dot4 {
+  color: #9ade32;
+}
+
+.ts-maj-dot {
+  margin-left: 6px !important;
+}
+
+.ts-min-dot {
+  margin-left: 13%;
+}
+
+.ts-maj-alert-dot {
+  margin-left: 2vw;
+}
+
+.ts-min-alert-dot {
+  margin-left: 2.4vw;
+}
+
+.ts-alert-values {
+  margin-left: 45%;
+  margin-top: 10%
+}
+
+.disableBtn {
+  color: grey!important;
+  border: none !important;
+  background: #DFEAE8!important;
+}
+
+.enableBtn {
+  color: white !important;
+  background: #337AB7 !important;
+}
+
+.lblAlertTable {
+  font-size: 11px;
+  white-space: nowrap;
+  width: 34%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alertAvailable:hover {
+  color: #9ADE32;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.alertValues:hover {
+  cursor: pointer;
+  text-decoration: underline
+}
+
+.ts-alerts {
+  display: inline-flex;
+  height: 0.8vh;
+  font-size: 11px;
+  width: 32%;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px 0px #828282;
+}
+
+.ts-serverity {
+  padding: 4px 2px 0;
+}
+
+.dotted-class {
+  display: inline-flex;
+  font-size: 11px;
+  line-height: 11px;
+  padding-top: 4px;
+  /* color : #252525;*/
+}
+
+/*------------------------------Tier Status Health---------------------*/
+
+.ts-health-component {
+  height: 11.5vh;
+  width: 100%;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  display: inline-block;
+}
+
+.ts-business-health {
+  height: 11vh;
+  padding: 4px 2px 0;
+}
+
+.ts-server-health {
+  height: 11vh;
+  padding: 4px 2px 0;
+}
+
+.ts-ip-health {
+  height: 11vh;
+  padding: 4px 2px 0;
+}
+
+.ts-alert-crit {
+  background: #FF0000;
+}
+
+.ts-alert-maj {
+  background: #F69606;
+}
+
+.ts-alert-nor {
+  background: #9ADE32;
+}
+
+.dot1, .dot2, .dot3, .dot4 {
+  font-size: 11px;
+}
+
+.dot1 {
+  color: #FF0000;
+}
+
+.dot2 {
+  color: #F69606;
+}
+
+.dot3 {
+  color: #FFE135;
+}
+
+.dot4 {
+  color: #9ADE32;
+}
+
+.ts-maj-dot {
+  margin-left: 4%;
+}
+
+.ts-min-dot {
+  margin-left: 5%;
+}
+
+.colored-alert {
+  border-radius: 2px;
+  /* background: grey; */
+}
+
+.lblName {
+  font-size: 12px;
+  white-space: nowrap;
+  width: 80%;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 2px;
+}
+
+.tierStatusDCs>.ng-tns-c15-20.ui-multiselect.ui-widget.ui-state-default.ui-corner-all {
+  top: 4px;
+}
+
+.tierStatusPanel>div[id^='ui-panel-'] {
+  overflow: scroll;
+}
+
+/*
+.tierStatusPanel>div#ui-panel-0 {
+     overflow: scroll;
+}
+*/
+
+/* Tier status search node dropdown */
+
+.search-node-drp li.ng-tns-c11-5.ui-dropdown-item.ui-corner-all.ng-star-inserted {
+  margin-left: 10px;
+}
+
+.search-node-drp li.ui-dropdown-item-group.ng-tns-c19-146.ng-star-inserted {
+  border-bottom: 1px solid;
+  margin-top: 2px;
+}
+
+.search-node-drp .ng-tns-c19-146.ui-dropdown.ui-widget.ui-state-default.ui-corner-all.ui-helper-clearfix.ui-dropdown-open {
+  max-width: 250px;
+}
+
+.tierStatus .search-node-drp .ui-widget-content {
+  background: inherit;
+}
+
+.edSinglePanelPopup .ui-dialog.ui-widget .ui-dialog-titlebar .ui-dialog-title {
+  text-align: center;
+  display: block;
+}
+
+.highcharts-point {
+  stroke-width: 0.5 !important;
+}
+
+.tierStatus .ui-tabview.ui-widget.ui-widget-content.ui-corner-all.ui-tabview-top {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  height: 100%;
+}
+
+.show-tier-info .ui-panel .ui-panel-content {
+  height: 72.5vh !important;
+  overflow: scroll;
+}
+
+.show-tier-info-line-chart {
+  margin-left: -19px !important;
+}
+
+/* css for the corelation id field in Save FlowPath */
+
+.chips-box .ui-chips.ui-widget {
+  height: 50px !important;
+  overflow-x: auto;
+}
+
+.singlePanel g.highcharts-button.highcharts-reset-zoom {
+  transform: translate(1056px, 10px);
+}
+
+.singlePanel text.highcharts-title>tspan {
+  display: none;
+}
+
+.common-file-editor .ui-dialog-content.ui-widget-content {
+  height: 80vh;
+  overflow: auto;
+  margin: 1% 1% 1% 1%;
+  padding: 0.5% 1% 0.5% 1%;
+  border: 1px solid #d8d1d1;
+  border-radius: 5px;
+}
+
+.common-file-editor .ui-dialog-maximized .ui-dialog-content.ui-widget-content {
+  margin: 3px !important;
+}
+
+.common-file-editor a.ui-dialog-titlebar-icon.ui-corner-all.ng-star-inserted {
+  color: white;
+}

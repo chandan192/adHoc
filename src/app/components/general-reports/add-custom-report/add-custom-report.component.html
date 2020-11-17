@@ -1,0 +1,309 @@
+<!-- Go Back to Reports icon -->
+<span style="float: right;padding: 15px 36px;cursor: pointer;" title="Browse Reports">
+  <i class="material-icons" style="font-size: 30px;" (click)=backToReports()>description</i>
+</span>
+
+<!-- Stepper -->
+<p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+
+<p-panel class="prime-dialog" [style]="{'margin-left': '5px','margin-right': '5px'}">
+  <p-header>
+    <h6>{{header}} </h6>
+  </p-header>
+  <div>
+    <div class="ui-g" *ngIf="_selectedColumns.length > 0" style="margin-bottom: 5px;">
+      <button pButton type="button" label="Columns" style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
+      <ng-container *ngFor="let i of _selectedColumns">
+        <span class=" ui-panelmenu ">
+          <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
+            <a class="chipsCSS">{{i}}</a>
+          </span></span>&nbsp;
+      </ng-container>
+    </div>
+    <div class="ui-g" *ngIf="_selectedDimension.length > 0" style="margin-bottom: 5px;">
+      <button pButton type="button" label="Dimension"
+        style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
+      <span class="ui-panelmenu">
+        <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
+          <a class="chipsCSS">{{_selectedDimension[0]}}</a>
+        </span></span>&nbsp;
+      <span class="ui-panelmenu">
+        <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
+          <a class="chipsCSS">{{_Options2Value == null ? 'All':_Options2Value.label }}</a>
+        </span></span>
+    </div>
+    <div class="ui-g" *ngIf="noOfFilters.length > 1 ">
+      <button pButton type="button" label="Filters" style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
+      <ng-container *ngFor="let i of noOfFilters;let j= index">
+        <ng-container *ngIf="j<noOfFilters.length-1 && i._filters3 != null">
+          <span class="ui-panelmenu" *ngIf="j != 0">
+            <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
+              <a class="chipsCSS">{{_andOr | uppercase}}</a>
+            </span></span>&nbsp;
+          <span class="ui-panelmenu">
+            <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
+              <a class="chipsCSS">{{i._filters1.label + ' ' + i._filters2 + ' ' + i._filters3.label }}</a>
+            </span></span>&nbsp;
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <p-footer>
+    <!-- Step-1 -->
+    <div *ngIf="activeIndex == 0">
+
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-2">
+          <p-selectButton [options]="sessionORpage" [(ngModel)]="_sessionORpage" (onChange)="sessionPageChange($event)">
+          </p-selectButton>
+        </div>
+      </div>
+
+      <ng-container *ngIf="_sessionORpage == 'session';else elsePage" class="ui-g">
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <p-fieldset>
+              <p-header>
+                <h6>Choose Report Data Fields(s)</h6>
+              </p-header>
+              <!-- loader -->
+              <app-loader [busy]="Options1.length === 0" [position]="'relative'" [h]="'100px'">
+              </app-loader>
+              <div class="ui-g-3" *ngFor="let i of Options1">
+                <p-checkbox name="sessionCheckBox1" value="{{i.value}}" label="{{i.label}}"
+                  [(ngModel)]="_selectedColumns">
+                </p-checkbox>
+              </div>
+            </p-fieldset>
+          </div>
+        </div>
+
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <p-fieldset>
+              <p-header>
+                <h6>Choose Report Dimension(s)</h6>
+              </p-header>
+              <app-loader [busy]="Options2.length === 0" [position]="'relative'" [h]="'100px'">
+              </app-loader>
+              <div class="ui-g-3" *ngFor="let i of Options2; let j=index">
+                <p-checkbox name="sessionCheckBox2" value="{{i.value}}" label="{{i.label}}"
+                  [(ngModel)]="_selectedDimension" (onChange)="onChange(j)"></p-checkbox>
+                <p-dropdown [options]="Options2[j].array" [(ngModel)]="_Options2Value" [disabled]="Options2[j].disabled"
+                  optionLabel="label" placeholder="All">
+                </p-dropdown>
+              </div>
+            </p-fieldset>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-template #elsePage>
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <p-fieldset>
+              <p-header>
+                <h6>Choose Report Data Fields(s)</h6>
+              </p-header>
+              <app-loader [busy]="Options1.length === 0" [position]="'relative'" [h]="'100px'">
+              </app-loader>
+              <div class="ui-g-3" *ngFor="let i of Options1">
+                <p-checkbox name="pageCheckBox1" value="{{i.value}}" label="{{i.label}}" [(ngModel)]="_selectedColumns">
+                </p-checkbox>
+              </div>
+            </p-fieldset>
+          </div>
+        </div>
+
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <p-fieldset>
+              <p-header>
+                <h6>Choose Report Dimension(s)</h6>
+              </p-header>
+              <app-loader [busy]="Options2.length === 0" [position]="'relative'" [h]="'100px'">
+              </app-loader>
+              <div class="ui-g-3" *ngFor="let i of Options2;let j= index">
+                <p-checkbox name="pageCheckBox2" value="{{i.value}}" label="{{i.label}}"
+                  [(ngModel)]="_selectedDimension" (onChange)="onChange(j)">
+                </p-checkbox>
+                <p-dropdown [options]="Options2[j].array" [(ngModel)]="_Options2Value" [disabled]="Options2[j].disabled"
+                  optionLabel="label" placeholder="All">
+                </p-dropdown>
+              </div>
+            </p-fieldset>
+          </div>
+        </div>
+      </ng-template>
+      <br>
+      <button pButton type="button" (click)="openStep2()" label="Next"
+        style="min-height: 28px;padding: .25em 1em;"></button>
+    </div>
+
+    <!-- Step-2 -->
+    <div *ngIf="activeIndex == 1">
+      <p-toolbar *ngIf="showToolbarBox === true">
+        <div class="ui-g">
+          <div class="ui-g-3">
+            <label>Column Name </label>&nbsp;
+            <input type="text" pInputText [(ngModel)]="_colName" />
+          </div>
+          <div class="ui-g-3">
+            <label>Formula </label>&nbsp;
+            <input type="text" pInputText [(ngModel)]="_formula" (keyup)="validateFormula($event)" />
+          </div>
+          <div class="ui-g-3">
+            <label>Data Type</label>&nbsp;
+            <p-dropdown [options]="dataType" [(ngModel)]="_dataType"></p-dropdown>
+          </div>
+          <div class="ui-g-3">
+            <button class="btn_icon" style="margin-right: 10px;border-radius: 50% !important;"
+              (click)="editColumnEnabled == false ?saveDerCol():saveEditCol(colIndxToEdit)">
+              <i class="material-icons m_icon" title="Add Column" style="color: black;">
+                done
+              </i>
+            </button>
+            <button class="btn_icon" (click)="showToolbar(false)" style="border-radius: 50% !important;">
+              <i class="material-icons m_icon" title="Cancel" style="color: black;">
+                clear
+              </i>
+            </button>
+          </div>
+        </div>
+        <!-- error message for Add Column -->
+        <div class="ui-g" *ngIf="error != ''">
+          <span style="color: red;font-weight: 500;"><i class="fa fa-exclamation-triangle"
+              style="font-size: medium;"></i> &nbsp;{{error}}</span>
+        </div>
+      </p-toolbar>
+      <br>
+      <!--   <p-dataTable [value]="tableData" resizableColumns="true">
+        <p-headerColumnGroup>
+          <p-row>
+            <p-column *ngFor="let col of cols">
+              <ng-template pTemplate="header">
+                <span (contextmenu)="contextMenu($event, col.colIndex)">{{col.colIndex}}</span>
+              </ng-template>
+            </p-column>
+          </p-row>
+
+          <p-row>
+            <p-column *ngFor="let col of cols">
+              <ng-template pTemplate="header">
+                <span (contextmenu)="contextMenu($event, col.colIndex)">{{col.header}}</span>
+              </ng-template>
+            </p-column>
+          </p-row>
+        </p-headerColumnGroup>
+
+        <p-column [field]="col.field" *ngFor="let col of cols" [editable]="true"></p-column>
+        <p-footerColumnGroup>
+          <p-row>
+            <p-column [footer]="tableFooter[i]" *ngFor="let col of cols; let i=index"></p-column>
+          </p-row>
+        </p-footerColumnGroup>
+      </p-dataTable> -->
+
+
+      <!-- rightclick options -->
+      <p-menu #menu popup="popup" [model]="rightClickOptions" appendTo="body"></p-menu>
+      <br>
+      <button pButton type="button" (click)="openStep1()" label="Back"
+        style="min-height: 28px;padding: .25em 1em;"></button>
+      <button pButton type="button" (click)="openStep3()" label="Next"
+        style="min-height: 28px;padding: .25em 1em;"></button>
+
+    </div>
+
+    <!-- Step-3 -->
+    <div *ngIf="activeIndex == 2">
+      <div class="ui-g">
+        <h6 style="display: inline;margin-right: 20px;">Choose operation between filters : </h6>
+
+        <p-selectButton [options]="andOr" [(ngModel)]="_andOr" (onChange)="andOrChange($event)">
+        </p-selectButton>
+
+      </div>
+      <br>
+
+      <p-toolbar *ngFor="let i of noOfFilters; let j = index" [style]="{'margin':'10px', 'padding':'10px 15px'}">
+        <div class="ui-g">
+          <div [ngStyle]="{'float': 'left', 'pointer-events':i.pointerEvents}">
+            <button class="netvision-bg"
+              style="border-radius: 3px;border: 0;padding: 5px 20px;font-weight: 600;">{{_sessionORpage | uppercase }}</button>&nbsp;
+            <p-dropdown [options]="i.filters1" [(ngModel)]="i._filters1" (onChange)="setFilter2(j, $event.value.data)"
+              optionLabel="label">
+            </p-dropdown>&nbsp;
+            <p-dropdown [options]="i.filters2" [(ngModel)]="i._filters2"></p-dropdown>&nbsp;
+            <p-dropdown [options]="i.filters3" [(ngModel)]="i._filters3" optionLabel="label"
+              placeholder="select filter value" [disabled]="i.configurable"></p-dropdown>
+            &nbsp;&nbsp;
+            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;">
+              <i class="material-icons  m_icon" *ngIf="!i.configurable" (click)="i.configurable = !i.configurable"
+                title="Not Configurable">
+                block
+              </i>
+            </button>
+            <!-- <ng-template> -->
+            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;" *ngIf="i.configurable">
+              <i class="material-icons  m_icon" (click)="i.configurable = !i.configurable" title="Configurable">
+                create
+              </i>
+            </button>&nbsp;
+            <!-- </ng-template> -->
+
+
+            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;" (click)="fixRule()"
+              *ngIf="j == noOfFilters.length - 1 ">
+              <i class="material-icons m_icon" title="Add Column">
+                done
+              </i>
+            </button>
+          </div>
+          <div style="float: right;">
+
+            <i class="fa fa-close" title="Close" (click)="removeRule(j)" style="color:red;cursor: pointer;"
+              *ngIf="noOfFilters.length > 1">
+            </i>
+          </div>
+        </div>
+      </p-toolbar>
+
+      <br>
+      <!-- <div class="ui-g"> -->
+      <button pButton type="button" (click)="openStep2()" label="Back"
+        style="min-height: 28px;padding: .25em 1em;"></button>
+      <button pButton type="button" label="Finish" (click)="showSavePopup()"
+        style="min-height: 28px;padding: .25em 1em;"></button>
+      <!-- </div> -->
+
+      <p-dialog header="Save Custom Report" [(visible)]="visible" [modal]="true" [responsive]="true"
+        [style]="{width: '350px', minWidth: '200px'}" [minY]="300" [maximizable]="false" [baseZIndex]="10000"
+        appendTo="body">
+        <div class="ui-g" style="text-align: center;">
+          <label>Report Name</label><br>
+          <input type="text" pInputText [(ngModel)]="_reportName" style="width: 80%;">
+        </div>
+        <br>
+
+        <div class="ui-g" style="text-align: center;">
+          <label>Report Description</label><br>
+          <textarea pInputTextarea [(ngModel)]="_reportDescription" style="width: 80%;"></textarea>
+        </div>
+        <br>
+        <div class="ui-g" style="text-align: center;">
+          <label>Report Group</label><br>
+          <p-dropdown [options]="reportGroup" [(ngModel)]="_reportGroup" [style]="{'width': '80%'}">
+          </p-dropdown>
+        </div>
+        <hr>
+        <div class="ui-g" style="text-align: center;">
+          <button pButton type="button" label="Save" (click)="saveWizardData()"></button>
+          <button pButton type="button" label="Cancel" (click)="visible = false"></button>
+        </div>
+      </p-dialog>
+    </div>
+  </p-footer>
+</p-panel>

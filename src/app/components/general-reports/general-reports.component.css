@@ -1,0 +1,54 @@
+.mysidenav {
+  height: 100%;
+  overflow: auto;
+  width: 230px;
+  position: absolute;
+  z-index: 1;
+  margin-top: -1px;
+  left: 0;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .3);
+}
+
+.mymain {
+  margin-left: 230px;
+}
+
+:host>>>.ui-accordion .ui-accordion-header {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 0px;
+  margin-top: 0px;
+}
+
+:host>>>.ui-panelmenu .ui-panelmenu-header {
+  border-radius: 0px;
+  border-right: none;
+  border-left: none;
+}
+
+:host>>>.ui-accordion .ui-accordion-content {
+  padding: 0px;
+}
+
+.p-justify-around {
+  justify-content: space-around;
+}
+
+.p-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -.5em;
+  margin-left: -.5em;
+  margin-top: -.5em;
+}
+
+:host>>>.ui-tree .ui-tree-container {
+  overflow: hidden !important;
+}
+
+:host>>>.ui-tree .ui-treenode-label {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 186px;
+}
