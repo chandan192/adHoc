@@ -32,10 +32,22 @@ import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TreeTableModule } from 'primeng/treetable';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { ListboxModule } from 'primeng/listbox';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SidebarModule } from 'primeng/sidebar';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+// spreadsheet
+import { SpreadsheetAllModule } from '@syncfusion/ej2-angular-spreadsheet';
+import { ExcelsheetComponent } from './components/excelsheet/excelsheet.component';
+import { AngularSplitModule } from 'angular-split';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ExcelReportComponent } from './components/excel-report/excel-report.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +56,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     GeneralReportChildComponent,
     AddCustomReportComponent,
     LoaderComponent,
+    ExcelsheetComponent,
+    ExcelReportComponent,
 
   ],
   imports: [
@@ -54,6 +68,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HttpClientModule,
     ChartModule,
+    SpreadsheetAllModule,
+    AngularSplitModule,
+    MatSidenavModule,
 
     // primeng
     AccordionModule,
@@ -73,6 +90,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     TableModule,
     MultiSelectModule,
     TreeTableModule,
+    TieredMenuModule,
+    ListboxModule,
+    AutoCompleteModule,
+    SidebarModule,
+    PanelMenuModule,
+    TooltipModule,
+    InputTextModule,
 
     // material
     MatSnackBarModule

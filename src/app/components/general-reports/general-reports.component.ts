@@ -89,8 +89,9 @@ export class GeneralReportsComponent implements OnInit {
       // on ngOnInit, the first panel  value should be expanded and selected by default
       this.generalPanelItems[0].expanded = true;
       this.selectedCRQ = this.generalReportData[0];
+      window['selectedCRQ'] = this.selectedCRQ;
       const hideTableGraph = document.querySelector<HTMLElement>('#hideTableGraph');
-      // hideTableGraph.style.display = 'none';
+      hideTableGraph.style.display = 'none';
     });
   }
 

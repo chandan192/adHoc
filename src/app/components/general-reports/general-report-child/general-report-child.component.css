@@ -78,3 +78,7 @@ chart {
 :host>>>label {
   margin-bottom: 0;
 }
+
+:host>>>.ui-treetable-caption, .ui-treetable-summary {
+  text-align: unset;
+}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddCustomReportComponent } from './add-custom-report.component';
+import { ExcelReportComponent } from './excel-report.component';
 
-describe('AddCustomReportComponent', () => {
-  let component: AddCustomReportComponent;
-  let fixture: ComponentFixture<AddCustomReportComponent>;
+describe('ExcelReportComponent', () => {
+  let component: ExcelReportComponent;
+  let fixture: ComponentFixture<ExcelReportComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddCustomReportComponent ]
+      declarations: [ ExcelReportComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddCustomReportComponent);
+    fixture = TestBed.createComponent(ExcelReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

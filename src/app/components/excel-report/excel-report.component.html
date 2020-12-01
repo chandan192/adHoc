@@ -1,0 +1,69 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <div class="ui-g ui-fluid" style="width: 250px;">
+            <div class="ui-g-12">
+                <div class="ui-g-1">
+                    <i class=" pi pi-list reports-icon" pTooltip="Show Template Reports" tooltipPosition="bottom"
+                        (click)="showTemplateReports()"></i>
+                </div>
+                <div class="ui-g-9">
+                    <span class="ss-reportName" pTooltip="Rename" tooltipPosition="bottom" (click)="showRename = true"
+                        *ngIf="!showRename">{{reportName.length > 20 ? reportName.slice(0,20)+'...':reportName}}</span>
+
+                    <input pInputText type="text" [(ngModel)]="reportName" *ngIf="showRename" class="ss-reportName"
+                        (mouseleave)="checkReportName()">
+                </div>
+
+                <div class="ui-g-2" style="text-align: right;padding-left: 0;padding-right: 0;">
+                    <i class="pi pi-save reports-icon" pTooltip="Save Report" tooltipPosition="bottom"
+                        (click)="saveReport()"></i>&nbsp;
+                    <i class="pi pi-trash reports-icon" pTooltip="Delete Report" tooltipPosition="bottom"
+                        (click)="deleteReport()"></i>
+                </div>
+            </div>
+
+            <div class="ui-g-12">
+                <button pButton label="Drop New Report" icon="pi pi-plus" style="font-size: 13px;"
+                    (click)="showADHOCDialog()"></button>
+            </div>
+            <p-panelMenu [model]="reports" [multiple]="true" [style]="{'width':'250px'}"></p-panelMenu>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="control-section">
+            <ejs-spreadsheet #default></ejs-spreadsheet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<p-sidebar [(visible)]="displayTemplateReport" [style]="{width:'250px', padding:'0'}" [modal]="false"
+    [showCloseIcon]="false">
+    <div class="ui-g ui-fluid ">
+        <div class="ui-g-12 netvision-bg">
+            <div class="ui-g-10" style="text-align: center;">
+                <h5>Template Report</h5>
+            </div>
+            <div class="ui-g-2" style="text-align: right;">
+                <i class="pi pi-times" style="font-weight: 700;cursor: pointer;"
+                    (click)="displayTemplateReport=false"></i>
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <button pButton label="Create New Template" icon="pi pi-plus" (click)="createNewTemplate()"
+                style="height: 25px;"></button>
+        </div>
+
+        <div class="ui-g-12" style="padding: 0;">
+            <p-listbox [options]="templateReports" [(ngModel)]="selectedTemplateReport" [filter]="true"
+                (onChange)="getReportListDetail($event)"></p-listbox>
+        </div>
+    </div>
+</p-sidebar>
+
+
+<p-dialog header="Add Custom Report" [(visible)]="displayADHOCReport" [maximizable]="true" [draggable]="false"
+    [resizable]="false" appendTo="body" [style]="{overflow:'auto', width:'1000px'}" (onHide)="XLSTemplate=false">
+    <app-add-custom-report [XLSTemplate]="XLSTemplate" (XLSTemplateDialog)="closeADHOCDialog($event)"
+        *ngIf="XLSTemplate">
+    </app-add-custom-report>
+</p-dialog>

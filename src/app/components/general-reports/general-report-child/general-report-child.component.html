@@ -88,7 +88,7 @@
     <hr style="margin-top: 5px; margin-bottom: 5px;">
 
 
-    <p-table [columns]="selectedColumns" [value]="tableData" #dt id="myTable" *ngIf="tableData.length > 0" [rows]="15"
+    <!-- <p-table [columns]="selectedColumns" [value]="tableData" #dt id="myTable" *ngIf="tableData.length > 0" [rows]="15"
       [paginator]="paginator" [resizableColumns]="true" [showCurrentPageReport]="true"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} rows">
       <ng-template pTemplate="caption">
@@ -131,11 +131,57 @@
           </td>
         </tr>
       </ng-template>
-      <!-- <ng-template pTemplate="summary">
-        There are {{cars?.length}} cars
-      </ng-template> -->
-    </p-table>
+    </p-table> -->
 
+
+
+    <p-treeTable #tt [value]="tableData" [columns]="selectedColumns" [resizableColumns]="true" [paginator]="true"
+      [rows]="15" id="myTable" *ngIf="tableData.length > 0">
+
+      <ng-template pTemplate="caption">
+        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+          selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns">
+        </p-multiSelect>
+
+        <span style="float: right">
+          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter"
+            (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">&nbsp;
+
+          <button pButton type="button" icon="pi pi-download" label=" Excel" class="btnClass"
+            (click)="tableToExcel()"></button>
+          <button pButton type="button" icon="pi pi-download" label=" CSV" class="btnClass"
+            (click)="exportCSV()"></button>
+        </span>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [ttSortableColumn]="col.field" ttResizableColumn>
+            {{col.header}}
+            <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns; let i = index"
+            [ngStyle]="{'text-align':isNumber(rowData[col.field])?'right':'null'}">
+            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="footer" let-columns>
+        <tr>
+          <td *ngFor="let col of columns" [ngStyle]="{'text-align':isNumber(tableFooter[col.header])?'right':'null'}">
+            {{tableFooter[col.header]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
   </div>
 
 </p-fieldset>

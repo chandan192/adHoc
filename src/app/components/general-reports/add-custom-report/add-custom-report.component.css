@@ -54,3 +54,31 @@ h6 {
 :host>>>.ui-fieldset, .ui-fieldset .ui-fieldset-legend {
   padding: 0 1em;
 }
+
+.innerChipsCSS {
+  margin-left: 5px;
+  margin-right: -10px;
+}
+
+:host>>>#rule-button>span.ui-button-icon-left.ui-clickable {
+  font-size: 15px;
+}
+
+.sort-badge {
+  border-radius: 50%;
+  margin-right: -12px;
+  margin-top: -22px;
+  font-size: 12px;
+  border: 0;
+  cursor: pointer;
+}
+
+th .showElement {
+  visibility: hidden;
+}
+
+th:hover .showElement {
+  visibility: visible;
+  float: right;
+  cursor: pointer;
+}

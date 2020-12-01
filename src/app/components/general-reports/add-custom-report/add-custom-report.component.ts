@@ -1,7 +1,7 @@
 import { CRQColumn, CROperand, CRQFilters } from './CRQColumn';
 import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, EventEmitter } from '@angular/core';
+import { MenuItem, TreeNode } from 'primeng/api';
 import { NvhttpService } from '../../../services/nvhttp.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
@@ -13,8 +13,10 @@ import { ScrollDispatcher } from '@angular/cdk/scrolling';
   styleUrls: ['./add-custom-report.component.css']
 })
 
-export class AddCustomReportComponent implements OnInit {
+export class AddCustomReportComponent implements OnInit, OnChanges {
   @ViewChild('menu', { static: false }) menu;
+  @Input() XLSTemplate: boolean;
+  @Output() XLSTemplateDialog = new EventEmitter<any>();
   // breadInfo: BreadCrumbInfo;
   items: MenuItem[];
   sessionORpage: any[];
@@ -26,13 +28,14 @@ export class AddCustomReportComponent implements OnInit {
   _andOr = 'and';
   _selectedColumns: string[] = [];
   _selectedDimension: string[] = [];
+  _selectedSorting: { column: string, order: string }[] = [];
   Options1: any[] = [];
   Options2: any[] = [];
   _Options2Value: any;
   prevCheckBoxIndex = -1;
   header: string;
   cols: { field: string; header: string; colIndex: string }[];
-  tableData: any[];
+  tableData: TreeNode[];
   tableFooter: any[];
   rightClickOptions: MenuItem[] = [];
   dataType: any[];
@@ -121,6 +124,10 @@ export class AddCustomReportComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+
+  }
+
   loadLibrary() {
     const s = document.createElement('script');
     s.type = 'text/javascript';
@@ -176,6 +183,15 @@ export class AddCustomReportComponent implements OnInit {
     this.CRQ.sequence = {};
     this.CRQ.reportType = 'matrix';
 
+    const check = this._selectedSorting.every((el) => {
+      return this._selectedColumns.indexOf(el.column) !== -1;
+    });
+
+    if (!check) {
+      this._selectedSorting = [];
+      this.CRQ.orderBy = [];
+    }
+
     this.insertDataInCRQ();
 
     this.setSequenceRows();
@@ -213,19 +229,21 @@ export class AddCustomReportComponent implements OnInit {
           if (this._Options2Value === null) {
             // tslint:disable-next-line: forin
             for (const j in this.Options2[i].array) {
-              this.tableData[j] = {};
-              this.tableData[j][this._selectedDimension[0]] = this.Options2[i].array[j].label;
+              this.tableData[j] = {} as TreeNode;
+              this.tableData[j].data = {};
+              this.tableData[j].data[this._selectedDimension[0]] = this.Options2[i].array[j].label;
 
               for (const k of this.CRQ.columns) {
-                this.tableData[j][k] = null;
+                this.tableData[j].data[k.name] = null;
               }
             }
 
           } else {
-            this.tableData[0] = {};
-            this.tableData[0][this._selectedDimension[0]] = this._Options2Value.label;
+            this.tableData[0] = {} as TreeNode;
+            this.tableData[0].data = {};
+            this.tableData[0].data[this._selectedDimension[0]] = this._Options2Value.label;
             for (const m of this.CRQ.columns) {
-              this.tableData[0][m] = null;
+              this.tableData[0].data[m.name] = null;
             }
           }
         }
@@ -236,8 +254,9 @@ export class AddCustomReportComponent implements OnInit {
       }
     } else {
       for (const i of this.cols) {
-        this.tableData[0] = {};
-        this.tableData[0][i.header] = null;
+        this.tableData[0] = {} as TreeNode;
+        this.tableData[0].data = {};
+        this.tableData[0].data[i.header] = null;
       }
     }
 
@@ -245,6 +264,10 @@ export class AddCustomReportComponent implements OnInit {
     for (let i = 0; i < this.cols.length; i++) {
       this.cols[i].colIndex = String.fromCharCode(65 + i);
     }
+
+    console.log(this.tableData);
+    console.log(this.tableFooter);
+    console.log('CRQ.Columns', this.CRQ.columns);
   }
 
   setSequenceRows() {
@@ -393,7 +416,7 @@ export class AddCustomReportComponent implements OnInit {
       }
 
       tempResult[0] = new CROperand(0, temp[1] + ':' + temp[0]);
-      let clmObj3 = new CRQFilters(operator, tempResult, false);
+      const clmObj3 = new CRQFilters(operator, tempResult, false);
 
       tempColumn.push(clmObj3);
 
@@ -518,6 +541,20 @@ export class AddCustomReportComponent implements OnInit {
           this.preEditColumn(i);
         }
       },
+      {
+        label: 'Sort', icon: 'pi pi-sort-alt', disabled: false, visible: true,
+        items: [{
+          label: 'Sort Ascending', icon: 'pi pi-sort-alpha-down', disabled: false, visible: true, command: (e: any) => {
+
+            this.addSorting({ column: this.CRQ.columns[this.excelHash[i]].name, order: 'ASC' });
+          }
+        },
+        {
+          label: 'Sort Descending', icon: 'pi pi-sort-alpha-up-alt', disabled: false, visible: true, command: (e: any) => {
+            this.addSorting({ column: this.CRQ.columns[this.excelHash[i]].name, order: 'DESC' });
+          }
+        }]
+      },
       { separator: true },
       {
         label: 'Currency', icon: 'fa fa-usd', disabled: false, visible: true, command: (e: any) => {
@@ -565,6 +602,40 @@ export class AddCustomReportComponent implements OnInit {
     }
 
     this.scrollDispatcher.scrolled().subscribe(() => this.menu.visible = false);
+  }
+
+
+  addSorting(data: { column: string, order: string }) {
+    console.log('data ----', data);
+    /*  sort: [{
+         column: 'column_name',
+         order:'ASC'
+     }] */
+
+    if (this.CRQ.orderBy !== undefined) {
+
+      const index = this.CRQ.orderBy.findIndex(x => x.column === data.column);
+
+      if (index === -1) {
+        // if the element added is totally different
+        this.CRQ.orderBy.push(data);
+
+      } else {
+        // check if the element is present and order is different
+        this.CRQ.orderBy[index].order = data.order;
+      }
+
+    } else {
+      // if the CRQ doesnot contain the sort property then add it
+      this.CRQ.orderBy = [];
+      this.CRQ.orderBy.push(data);
+    }
+
+
+    this._selectedSorting = this.CRQ.orderBy;
+
+    console.log('Sort -------- ', this.CRQ.orderBy);
+
   }
 
   preEditColumn(indx) {
@@ -711,17 +782,17 @@ export class AddCustomReportComponent implements OnInit {
   }
 
   openStep3() {
-    if (this.tableData.length > 0) {
-      this.activeIndex = 2;
-      this.items[2].disabled = false;
-      this.header = 'Apply filters to the report and select the operation to be performed between the filters.';
-    } else {
-      this.activeIndex = 0;
-      this._snackBar.open('Please Select a Column to Proceed', 'OK', {
-        duration: 3000
-      });
-      return;
-    }
+    // if (this.tableData.length > 0) {
+    this.activeIndex = 2;
+    this.items[2].disabled = false;
+    this.header = 'Apply filters to the report and select the operation to be performed between the filters.';
+    // } else {
+    //   this.activeIndex = 0;
+    //   this._snackBar.open('Please Select a Column to Proceed', 'OK', {
+    //     duration: 3000
+    //   });
+    //   return;
+    // }
     this.andOr = [];
     this.andOr.push({ label: 'AND', value: 'and' });
     this.andOr.push({ label: 'OR', value: 'or' });
@@ -797,10 +868,12 @@ export class AddCustomReportComponent implements OnInit {
           if (i.advance) { } else {
 
             if (i.SuggestedArray !== undefined && i.SuggestedArray !== null && i.SuggestedArray !== '') {
-              const tempList = window[i.SuggestedArray] as unknown as any[];
+              const tempList = window[i.SuggestedArray];
               const tmpArray = [];
-              for (const j of tempList) {
-                tmpArray.push({ label: j.name, value: j.data.id });
+              if (tempList !== undefined) {
+                for (const j of tempList as unknown as any[]) {
+                  tmpArray.push({ label: j.name, value: j.data.id });
+                }
               }
               // const temp = '1' + i.name.split(' ').join('');
               const temp = i.name.split(' ').join('');
@@ -848,10 +921,12 @@ export class AddCustomReportComponent implements OnInit {
 
 
             if (i.SuggestedArray !== undefined && i.SuggestedArray !== null && i.SuggestedArray !== '') {
-              const tempList = window[i.SuggestedArray] as unknown as any[];
+              const tempList = window[i.SuggestedArray];
               const tmpArray: any[] = [];
-              for (const j of tempList) {
-                tmpArray.push({ label: j.name, value: j.data.id });
+              if (tempList !== undefined) {
+                for (const j of tempList as unknown as any[]) {
+                  tmpArray.push({ label: j.name, value: j.data.id });
+                }
               }
               // const temp = '1' + i.name.split(' ').join('');
               const temp = i.name.split(' ').join('');
@@ -950,14 +1025,14 @@ export class AddCustomReportComponent implements OnInit {
 
   saveWizardData() {
 
-    if (this._reportName === '') {
+    if (!this.XLSTemplate && this._reportName === '') {
       this._snackBar.open('Please Enter a Report Name', 'OK', {
         duration: 3000
       });
       return;
     }
 
-    if (this.customCRQ !== undefined) {
+    if (!this.XLSTemplate && this.customCRQ !== undefined) {
       for (const i of this.customCRQ) {
         if (this._reportName === i.name) {
           this._snackBar.open('Report Name Already Exists', 'OK', {
@@ -988,10 +1063,15 @@ export class AddCustomReportComponent implements OnInit {
     // make a rest call to save the report
 
     this.http.saveCustomReport(this.CRQ).subscribe((response: any) => {
-      // after making rest call to save report navigate back to general reports component
-      // this.breadCrumbService.resetBreadCrumbOverView();
-      // this.breadCrumbService.removeBreadCrumb('Ad Hoc Report', NVBreadCrumbService.currentBreadInfo.seq);
-      this.router.navigate(['/home/netvision/generalreports']);
+
+      if (this.XLSTemplate) {
+        this.XLSTemplateDialog.emit(this.CRQ);
+      } else {
+        // after making rest call to save report navigate back to general reports component
+        // this.breadCrumbService.resetBreadCrumbOverView();
+        // this.breadCrumbService.removeBreadCrumb('Ad Hoc Report', NVBreadCrumbService.currentBreadInfo.seq);
+        this.router.navigate(['/home/netvision/generalreports']);
+      }
     });
 
   }
@@ -1438,6 +1518,11 @@ export class AddCustomReportComponent implements OnInit {
       }
     }
     return list;
+  }
+
+  deleteSorting(val) {
+    this._selectedSorting = this._selectedSorting.filter(e => e !== val);
+    this.CRQ.orderBy = this._selectedSorting;
   }
 
 }

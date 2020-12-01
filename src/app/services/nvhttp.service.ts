@@ -19,6 +19,9 @@ export class NvhttpService {
     generalreports: '/netvision/rest/webapi/generalreports?access_token=563e412ab7f5a282c15ae5de1732bfd1',
     deleteReports: '/netvision/reports/nvCustomQueryHanlder.jsp?',
     selectedCRQ: '/netvision/reports/nvCustomQueryHanlder.jsp?',
+    saveCustomReport: '/netvision/reports/nvCustomQueryHanlder.jsp?requestString=writeCRQFile',
+    templateReportList: '/netvision/rest/webapi/adhocreportlist?access_token=563e412ab7f5a282c15ae5de1732bfd1',
+    templateReportDetails: '/netvision/rest/webapi/adhocreportjson?access_token=563e412ab7f5a282c15ae5de1732bfd1'
   };
 
 
@@ -95,6 +98,18 @@ export class NvhttpService {
     };
     const data = 'jsonString=' + JSON.stringify(formData);
     return this.http.post(url, data, options).pipe(map((response: Response) => response));
+
+  }
+
+  getTeplateReportList() {
+    let url: string = this.getRequestUrl(NvhttpService.apiUrls.templateReportList);
+    return this.http.get(url).pipe(map((response: Response[]) => response));
+  }
+
+  getTemplateReportDetail(report) {
+    let url: string = this.getRequestUrl(NvhttpService.apiUrls.templateReportDetails);
+    url += '&reportName=' + report;
+    return this.http.get(url).pipe(map((response: Response) => response));
 
   }
 

@@ -11,27 +11,37 @@
     <h6>{{header}} </h6>
   </p-header>
   <div>
+    <!-- Columns -->
     <div class="ui-g" *ngIf="_selectedColumns.length > 0" style="margin-bottom: 5px;">
       <button pButton type="button" label="Columns" style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
       <ng-container *ngFor="let i of _selectedColumns">
-        <span class=" ui-panelmenu ">
-          <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
-            <a class="chipsCSS">{{i}}</a>
-          </span></span>&nbsp;
+        <span class="chipsCSS netvision-bg">{{i}}</span>
       </ng-container>
     </div>
+
+    <!-- Dimensions -->
     <div class="ui-g" *ngIf="_selectedDimension.length > 0" style="margin-bottom: 5px;">
       <button pButton type="button" label="Dimension"
         style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
-      <span class="ui-panelmenu">
-        <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
-          <a class="chipsCSS">{{_selectedDimension[0]}}</a>
-        </span></span>&nbsp;
-      <span class="ui-panelmenu">
-        <span class="ui-panelmenu-header ui-state-active" style="background: none;border: none;">
-          <a class="chipsCSS">{{_Options2Value == null ? 'All':_Options2Value.label }}</a>
-        </span></span>
+      <span class="chipsCSS netvision-bg"><span>{{_selectedDimension[0]}}</span>
+        <span
+          class="chipsCSS ui-state-default innerChipsCSS">{{_Options2Value == null ? 'All':_Options2Value.label }}</span>
+      </span>
     </div>
+
+    <!-- Sorting -->
+    <div class="ui-g" *ngIf="_selectedSorting.length > 0" style="margin-bottom: 5px;">
+      <button pButton type="button" label="Sorting" style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
+      <ng-container *ngFor="let i of _selectedSorting">
+        <span class="chipsCSS netvision-bg">
+          <span>{{i.column}}</span>
+          <span class="chipsCSS ui-state-default innerChipsCSS">{{i.order}}</span>
+          <i class="pi pi-times-circle ui-state-default sort-badge" title="remove sorting"
+            (click)="deleteSorting(i)"></i>
+        </span>
+      </ng-container>
+    </div>
+
     <div class="ui-g" *ngIf="noOfFilters.length > 1 ">
       <button pButton type="button" label="Filters" style="border-radius: 16px;min-height: 28px;"></button>&nbsp;:&nbsp;
       <ng-container *ngFor="let i of noOfFilters;let j= index">
@@ -179,6 +189,7 @@
         </div>
       </p-toolbar>
       <br>
+
       <!--   <p-dataTable [value]="tableData" resizableColumns="true">
         <p-headerColumnGroup>
           <p-row>
@@ -206,9 +217,45 @@
         </p-footerColumnGroup>
       </p-dataTable> -->
 
+      <p-treeTable [value]="tableData" [columns]="cols">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" (contextmenu)="contextMenu($event, col.colIndex)"
+              style="text-align: center;font-weight: 700;">
+              {{col.colIndex}}
+            </th>
+          </tr>
+          <tr>
+            <th *ngFor="let col of columns; let i = index" (contextmenu)="contextMenu($event, col.colIndex)"
+              style="text-align: center;font-weight: 700;">
+              {{col.header}}
+              <i class="pi pi-sort-down ui-state-default showElement" (click)="contextMenu($event, col.colIndex)"
+                *ngIf="i !== 0"></i>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns; let i = index">
+              <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="footer" let-columns style="text-align: center;font-weight: 700;">
+          <tr>
+            <td *ngFor="let col of columns; let i=index">
+              {{tableFooter[i]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+
 
       <!-- rightclick options -->
-      <p-menu #menu popup="popup" [model]="rightClickOptions" appendTo="body"></p-menu>
+      <p-tieredMenu #menu [popup]="true" [model]="rightClickOptions" appendTo="body"></p-tieredMenu>
+      <!-- <p-menu #menu popup="popup" [model]="rightClickOptions" appendTo="body"></p-menu> -->
       <br>
       <button pButton type="button" (click)="openStep1()" label="Back"
         style="min-height: 28px;padding: .25em 1em;"></button>
@@ -240,26 +287,14 @@
             <p-dropdown [options]="i.filters3" [(ngModel)]="i._filters3" optionLabel="label"
               placeholder="select filter value" [disabled]="i.configurable"></p-dropdown>
             &nbsp;&nbsp;
-            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;">
-              <i class="material-icons  m_icon" *ngIf="!i.configurable" (click)="i.configurable = !i.configurable"
-                title="Not Configurable">
-                block
-              </i>
-            </button>
-            <!-- <ng-template> -->
-            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;" *ngIf="i.configurable">
-              <i class="material-icons  m_icon" (click)="i.configurable = !i.configurable" title="Configurable">
-                create
-              </i>
-            </button>&nbsp;
-            <!-- </ng-template> -->
+
+            <button pButton [icon]="i.configurable ? 'pi pi-pencil':'pi pi-ban'"
+              title="{{i.configurable ? 'Configurable':'Not Configurable'}}" (click)="i.configurable = !i.configurable"
+              id="rule-button"></button>&nbsp;
 
 
-            <button class="btn_icon netvision-bg" style="border-radius: 50% !important;" (click)="fixRule()"
+            <button pButton icon="pi pi-check" id="rule-button" (click)="fixRule()"
               *ngIf="j == noOfFilters.length - 1 ">
-              <i class="material-icons m_icon" title="Add Column">
-                done
-              </i>
             </button>
           </div>
           <div style="float: right;">
@@ -275,7 +310,7 @@
       <!-- <div class="ui-g"> -->
       <button pButton type="button" (click)="openStep2()" label="Back"
         style="min-height: 28px;padding: .25em 1em;"></button>
-      <button pButton type="button" label="Finish" (click)="showSavePopup()"
+      <button pButton type="button" label="Finish" (click)=" XLSTemplate ? saveWizardData(): showSavePopup()"
         style="min-height: 28px;padding: .25em 1em;"></button>
       <!-- </div> -->
 

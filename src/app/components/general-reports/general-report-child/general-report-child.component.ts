@@ -34,7 +34,7 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
   selectedCRQData: any;
   CustomReportMetaData: any;
   transformResult: any;
-  tableData: any[] = [];
+  tableData: TreeNode[] = [];
   cols: any[] = [];
   _selectedColumns: any[];
   tableFooter: any = {};
@@ -105,7 +105,7 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
     this.metaDataService.getMetadata().subscribe((response: any) => {
       this.metadata = response;
       // -------channel----------
-      let channelm: any[] = Array.from(this.metadata.channelMap.keys());
+      const channelm: any[] = Array.from(this.metadata.channelMap.keys());
       this.channel = channelm.map(key => {
         return {
           label: this.metadata.channelMap.get(key).name,
@@ -203,7 +203,7 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
     this.selectedCRQData = null;
     let hideTableGraph;
     hideTableGraph = document.querySelector<HTMLElement>('#hideTableGraph');
-    hideTableGraph.style.display = "none";
+    hideTableGraph.style.display = 'none';
     this.showLoader = false;
 
 
@@ -280,7 +280,7 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
     this.startTime = st.getMonth() + 1 + '/' + st.getDate() + '/' + st.getFullYear() + ' ' + this.timeTo12HrFormat(st.toString().split(' ')[4].split(':')[0] + ':' + st.toString().split(' ')[4].split(':')[1]);
     this.endTime = et.getMonth() + 1 + '/' + et.getDate() + '/' + et.getFullYear() + ' ' + this.timeTo12HrFormat(et.toString().split(' ')[4].split(':')[0] + ':' + et.toString().split(' ')[4].split(':')[1]);
 
-    let bucketHash = { "0": 0, "1": 1, "2": 24, "3": 168, "4": 720 };
+    const bucketHash = { '0': 0, '1': 1, '2': 24, '3': 168, '4': 720 };
 
     this.selectedCRQ.queryArg = {};
     this.selectedCRQ.queryArg.startTime = parseInt(dateTimeMillis.split(',')[0]);
@@ -339,15 +339,15 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
         if (this.selectedCRQ.reportType == 'date') {
           n = 1;
           i = 2;
-          for (let item of this.transformResult[1]) {
+          for (const item of this.transformResult[1]) {
             this.filterGraph.push({ label: item.value, value: item.value });
           }
 
-          this.transformResult[1].unshift({ header: true, colspan: 1, rowspan: 1, value: 'Date/Time', format: "number" });
+          this.transformResult[1].unshift({ header: true, colspan: 1, rowspan: 1, value: 'Date/Time', format: 'number' });
         } else if (this.selectedCRQ.reportType == 'matrix') {
           n = 0;
           i = 2;
-          for (let item of this.selectedCRQ.columns) {
+          for (const item of this.selectedCRQ.columns) {
             this.filterGraph.push({
               label: item.name,
               value: item.name
@@ -370,35 +370,38 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
         if (i < this.transformResult.length - 1) {
           for (i; i < this.transformResult.length - 1; i++) {
 
-            this.tableData[k] = {};
+            this.tableData[k] = {} as TreeNode;
+            this.tableData[k].data = {};
+
             for (let j = 0; j < this.transformResult[n].length; j++) {
-              this.tableData[k][this.transformResult[n][j].value] = this.transformResult[i][j].value;
-              if ((i + 1) == (this.transformResult.length - 1))
+              this.tableData[k].data[this.transformResult[n][j].value] = this.transformResult[i][j].value;
+              if ((i + 1) == (this.transformResult.length - 1)) {
                 this.tableFooter[this.transformResult[n][j].value] = this.transformResult[i + 1][j].value;
+              }
             }
             k++;
 
           }
         } else {
-          this.tableData[0] = {};
+          this.tableData[0] = {} as TreeNode;
           this.tableFooter = {};
           for (let j = 0; j < this.transformResult[n].length; j++) {
-            this.tableData[0][this.transformResult[n][j].value] = undefined;
+            this.tableData[0].data[this.transformResult[n][j].value] = undefined;
             this.tableFooter[this.transformResult[n][j].value] = this.transformResult[i][j].value;
           }
         }
 
-        console.log("this.tableData : ", this.tableData);
+        console.log('this.tableData : ', this.tableData);
 
         //setting fields and header object
-        Object.keys(this.tableData[0]).forEach(item => {
+        Object.keys(this.tableData[0].data).forEach(item => {
           // console.log(item);
           this.cols.push({ field: item, header: item });
         });
         this.selectedColumns = this.cols;
 
         hideTableGraph = document.querySelector<HTMLElement>('#hideTableGraph');
-        hideTableGraph.style.display = "block";
+        hideTableGraph.style.display = 'block';
 
         this._filterGraph = this.filterGraph[0].value;
         this.onTopValueChange(this._topFilter);
@@ -411,26 +414,30 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
 
   showPieChart() {
     this._showPieChart = true;
-    let heading = (this._topFilter ? 'Bottom' : 'Top') + ' ' + this._filterCount + ' ' + (this.selectedCRQ.reportType != 'date' ? (this.selectedCRQ.reportType != 'fixed' ? this.selectedCRQ.rows[0].name : this.selectedCRQ.columnDetails[0].name) : this.selectedCRQ.columns[0].name) + ' on ' + this._filterGraph;
+    const heading = (this._topFilter ? 'Bottom' : 'Top') + ' ' + this._filterCount + ' ' + (this.selectedCRQ.reportType != 'date' ? (this.selectedCRQ.reportType != 'fixed' ? this.selectedCRQ.rows[0].name : this.selectedCRQ.columnDetails[0].name) : this.selectedCRQ.columns[0].name) + ' on ' + this._filterGraph;
     // let graphColumns = [];
-    let graphData = [];
+    const graphData = [];
 
     let sumArr = 0;
-    for (const i of this.tableData)
+    for (const i of this.tableData) {
       sumArr = sumArr + i[this._filterGraph];
+    }
 
     if (this.selectedCRQ.reportType != 'date') {
       if (this.selectedCRQ.reportType != 'fixed') {
-        for (let i = 0; i < this._filterCount && i < this.tableData.length; i++)
-          graphData.push([this.tableData[i][this.selectedCRQ.rows[0].name], (this.tableData[i][this._filterGraph]) / sumArr * 100]);
+        for (let i = 0; i < this._filterCount && i < this.tableData.length; i++) {
+          graphData.push([this.tableData[i].data[this.selectedCRQ.rows[0].name], (this.tableData[i].data[this._filterGraph]) / sumArr * 100]);
+        }
 
       } else {
-        for (let i = 0; i < this._filterCount && i < this.tableData.length; i++)
-          graphData.push([this.tableData[i][this.selectedCRQ.columnDetails[0].name], (this.tableData[i][this._filterGraph]) / sumArr * 100]);
+        for (let i = 0; i < this._filterCount && i < this.tableData.length; i++) {
+          graphData.push([this.tableData[i].data[this.selectedCRQ.columnDetails[0].name], (this.tableData[i].data[this._filterGraph]) / sumArr * 100]);
+        }
       }
     } else {
-      for (let i = 0; i < this._filterCount && i < this.tableData.length; i++)
-        graphData.push([this.tableData[i]['Date/Time'], (this.tableData[i][this._filterGraph]) / sumArr * 100]);
+      for (let i = 0; i < this._filterCount && i < this.tableData.length; i++) {
+        graphData.push([this.tableData[i].data['Date/Time'], (this.tableData[i].data[this._filterGraph]) / sumArr * 100]);
+      }
     }
 
     this.options = {};
@@ -478,24 +485,27 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
 
   showColumnChart() {
     this._showPieChart = false;
-    let graphColumns = [];
-    let graphData = [];
+    const graphColumns = [];
+    const graphData = [];
     for (let i = 0; i < this._filterCount && i < this.tableData.length; i++) {
       if (this.selectedCRQ.reportType != 'date') {
-        if (this.selectedCRQ.reportType != 'fixed')
-          graphColumns.push(this.tableData[i][this.selectedCRQ.rows[0].name]);
-        else
-          graphColumns.push(this.tableData[i][this.selectedCRQ.columnDetails[0].name]);
+        if (this.selectedCRQ.reportType != 'fixed') {
+          graphColumns.push(this.tableData[i].data[this.selectedCRQ.rows[0].name]);
+        }
+        else {
+          graphColumns.push(this.tableData[i].data[this.selectedCRQ.columnDetails[0].name]);
+        }
 
 
       } else {
-        graphColumns.push(this.tableData[i]['Date/Time']);
+        graphColumns.push(this.tableData[i].data['Date/Time']);
       }
     }
-    for (let i = 0; i < this._filterCount && i < this.tableData.length; i++)
-      graphData.push(parseInt(this.tableData[i][this._filterGraph]));
+    for (let i = 0; i < this._filterCount && i < this.tableData.length; i++) {
+      graphData.push(parseInt(this.tableData[i].data[this._filterGraph]));
+    }
 
-    let heading = (this._topFilter ? 'Bottom' : 'Top') + ' ' + this._filterCount + ' ' + (this.selectedCRQ.reportType != 'date' ? (this.selectedCRQ.reportType != 'fixed' ? this.selectedCRQ.rows[0].name : this.selectedCRQ.columnDetails[0].name) : this.selectedCRQ.columns[0].name) + ' on ' + this._filterGraph;
+    const heading = (this._topFilter ? 'Bottom' : 'Top') + ' ' + this._filterCount + ' ' + (this.selectedCRQ.reportType != 'date' ? (this.selectedCRQ.reportType != 'fixed' ? this.selectedCRQ.rows[0].name : this.selectedCRQ.columnDetails[0].name) : this.selectedCRQ.columns[0].name) + ' on ' + this._filterGraph;
 
     this.options = {};
     this.options = {
@@ -644,16 +654,16 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
     this.paginator = false;
 
     setTimeout(() => {
-      var table = "<thead>" + document.getElementById('myTable').children[0].children[1].children[0].children[0].innerHTML + "</thead><tbody>" + document.getElementById('myTable').children[0].children[1].children[0].children[2].innerHTML + "</tbody><tfoot>" + document.getElementById('myTable').children[0].children[1].children[0].children[1].innerHTML + "</tfoot>";
-      var table1 = "<html><head><style>  thead tr th {background-color:#3774aa;border: thin solid #eee;height:50} thead, tbody tr td{border:thin solid  #eee} tfoot tr td {background-color:#eee;border:thin solid #eee;height:30;font-weight:700}  div {text-align:center;font-weight:700;font-size:16px;}</style></head><body><div><img src='" + document.location.origin + "/ProductUI/images/cavi_logo_new.png'></div><div>" + document.getElementById('grHeading').textContent + "</div><div>" + document.getElementById('grBody').textContent + "</div><table>" + table + "</table></body></html>";
-      var myBlob = new Blob([table1], {
+      const table = '<thead>' + document.getElementById('myTable').children[0].children[1].children[0].children[0].innerHTML + '</thead><tbody>' + document.getElementById('myTable').children[0].children[1].children[0].children[2].innerHTML + '</tbody><tfoot>' + document.getElementById('myTable').children[0].children[1].children[0].children[1].innerHTML + '</tfoot>';
+      const table1 = '<html><head><style>  thead tr th {background-color:#3774aa;border: thin solid #eee;height:50} thead, tbody tr td{border:thin solid  #eee} tfoot tr td {background-color:#eee;border:thin solid #eee;height:30;font-weight:700}  div {text-align:center;font-weight:700;font-size:16px;}</style></head><body><div><img src=\'' + document.location.origin + '/ProductUI/images/cavi_logo_new.png\'></div><div>' + document.getElementById('grHeading').textContent + '</div><div>' + document.getElementById('grBody').textContent + '</div><table>' + table + '</table></body></html>';
+      const myBlob = new Blob([table1], {
         type: 'application/vnd.ms-excel'
       });
-      var url = window.URL.createObjectURL(myBlob);
-      var a = document.createElement("a");
+      const url = window.URL.createObjectURL(myBlob);
+      const a = document.createElement('a');
       document.body.appendChild(a);
       a.href = url;
-      a.download = document.getElementById('grHeading').innerText + ".xls";
+      a.download = document.getElementById('grHeading').innerText + '.xls';
       a.click();
       //adding some delay in removing the dynamically created link solved the problem in FireFox
       setTimeout(function () {
@@ -687,4 +697,52 @@ export class GeneralReportChildComponent implements OnInit, OnChanges {
   isNumber(val) {
     return !isNaN(val);
   }
+
+  download_csv(csv, filename) {
+    let csvFile;
+    let downloadLink;
+
+    // CSV FILE
+    csvFile = new Blob([csv], { type: 'text/csv' });
+
+    // Download link
+    downloadLink = document.createElement('a');
+
+    // File name
+    downloadLink.download = filename;
+
+    // We have to create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Make sure that the link is not displayed
+    downloadLink.style.display = 'none';
+
+    // Add the link to your DOM
+    document.body.appendChild(downloadLink);
+
+    // Lanzamos
+    downloadLink.click();
+  }
+
+  exportCSV() {
+    const csv = [];
+    const rows = document.querySelectorAll('table tr');
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < rows.length; i++) {
+      // tslint:disable-next-line: one-variable-per-declaration
+      const row = [], cols = rows[i].querySelectorAll('td, th');
+
+      // tslint:disable-next-line: prefer-for-of
+      for (let j = 0; j < cols.length; j++) {
+        row.push((cols[j] as HTMLElement).innerText);
+      }
+
+      csv.push(row.join(','));
+    }
+
+    // Download CSV
+    this.download_csv(csv.join('\n'), this.selectedCRQ.crqname + '.csv');
+  }
+
 }
