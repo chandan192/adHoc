@@ -1,9 +1,9 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" [disableClose]="true">
         <div class="ui-g ui-fluid" style="width: 250px;">
             <div class="ui-g-12">
                 <div class="ui-g-1">
-                    <i class=" pi pi-list reports-icon" pTooltip="Show Template Reports" tooltipPosition="bottom"
+                    <i class=" pi pi-list reports-icon" title="Show Template Reports"
                         (click)="showTemplateReports()"></i>
                 </div>
                 <div class="ui-g-9">
@@ -15,10 +15,8 @@
                 </div>
 
                 <div class="ui-g-2" style="text-align: right;padding-left: 0;padding-right: 0;">
-                    <i class="pi pi-save reports-icon" pTooltip="Save Report" tooltipPosition="bottom"
-                        (click)="saveReport()"></i>&nbsp;
-                    <i class="pi pi-trash reports-icon" pTooltip="Delete Report" tooltipPosition="bottom"
-                        (click)="deleteReport()"></i>
+                    <!-- <i class="pi pi-save reports-icon" title="Save Report" (click)="saveReport()"></i>&nbsp;
+                    <i class="pi pi-trash reports-icon" title="Delete Report" (click)="deleteReport()"></i> -->
                 </div>
             </div>
 
@@ -26,12 +24,18 @@
                 <button pButton label="Drop New Report" icon="pi pi-plus" style="font-size: 13px;"
                     (click)="showADHOCDialog()"></button>
             </div>
-            <p-panelMenu [model]="reports" [multiple]="true" [style]="{'width':'250px'}"></p-panelMenu>
+
+            <div class="ui-g-12">
+                <p-tree [value]="reports" selectionMode="single" [filter]="true" (onNodeSelect)="nodeSelect($event)">
+                </p-tree>
+            </div>
+
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="control-section">
-            <ejs-spreadsheet #default></ejs-spreadsheet>
+        <div id="control-section">
+            <ejs-spreadsheet #default>
+            </ejs-spreadsheet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
@@ -49,13 +53,27 @@
             </div>
         </div>
         <div class="ui-g-12">
-            <button pButton label="Create New Template" icon="pi pi-plus" (click)="createNewTemplate()"
+            <button pButton label="Create New Template" icon="pi pi-plus" (click)="newWorkbook()"
                 style="height: 25px;"></button>
         </div>
 
         <div class="ui-g-12" style="padding: 0;">
             <p-listbox [options]="templateReports" [(ngModel)]="selectedTemplateReport" [filter]="true"
-                (onChange)="getReportListDetail($event)"></p-listbox>
+                (onChange)="getReportListDetail($event)">
+                <ng-template let-report pTemplate="item">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-10">
+                            {{report.label}}
+                        </div>
+                        <div class="ui-g-2">
+                            <i class="pi pi-eye" style="float: left;" title="Preview Report"
+                                (click)="previewReport(report)"></i>
+                            <i class="pi pi-trash" style="float: right;" title="Delete Report"
+                                (click)="deleteReport($event, report)"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-listbox>
         </div>
     </div>
 </p-sidebar>
@@ -67,3 +85,55 @@
         *ngIf="XLSTemplate">
     </app-add-custom-report>
 </p-dialog>
+
+
+<!-- Preview Dialog -->
+<p-dialog header="Preview Report" [(visible)]="displayPreview" [modal]="true" [draggable]="true" [resizable]="false"
+    (onHide)="clearReport()">
+    <form [formGroup]="form">
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <div class="ui-g-1" style="line-height: 2;">
+                    <p-radioButton name="timeFilter" value="true" formControlName="timeFilter" label="Last">
+                    </p-radioButton>
+                </div>
+                <div class="ui-g-3" style="padding: 0;">
+                    <div class="ui-g-2">
+                        <input type="text" pInputText formControlName="lastValue"
+                            [disabled]="form.controls['timeFilter']?.value === 'false'" />
+                    </div>
+                    <div class="ui-g-10">
+                        <p-dropdown [options]="lastTime" formControlName="lastTime"
+                            [disabled]="form.controls['timeFilter']?.value === 'false'"></p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g-2" style="line-height: 2;">
+                    <p-radioButton name="timeFilter" value="false" formControlName="timeFilter" label="Specified">
+                    </p-radioButton>
+                </div>
+                <div class="ui-g-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">From</span>
+                        <p-calendar [showTime]="true" formControlName="stime" hourFormat="24" [maxDate]="maxDate"
+                            [disabled]="form.controls['timeFilter']?.value ==='true'">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="ui-g-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">To</span>
+                        <p-calendar [showTime]="true" formControlName="etime" hourFormat="24" [maxDate]="maxDate"
+                            [disabled]="form.controls['timeFilter']?.value === 'true'">&nbsp;
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <button pButton label="Preview" type="submit" (click)="onSubmit()"></button>
+    </p-footer>
+</p-dialog>
+
+<!-- create new template report confirmation -->
+<p-confirmDialog header="Spreadsheet"></p-confirmDialog>

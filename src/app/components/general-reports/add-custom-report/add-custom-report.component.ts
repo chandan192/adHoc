@@ -1025,14 +1025,14 @@ export class AddCustomReportComponent implements OnInit, OnChanges {
 
   saveWizardData() {
 
-    if (!this.XLSTemplate && this._reportName === '') {
+    if (this._reportName === '') {
       this._snackBar.open('Please Enter a Report Name', 'OK', {
         duration: 3000
       });
       return;
     }
 
-    if (!this.XLSTemplate && this.customCRQ !== undefined) {
+    if (this.customCRQ !== undefined) {
       for (const i of this.customCRQ) {
         if (this._reportName === i.name) {
           this._snackBar.open('Report Name Already Exists', 'OK', {

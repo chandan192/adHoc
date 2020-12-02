@@ -310,35 +310,38 @@
       <!-- <div class="ui-g"> -->
       <button pButton type="button" (click)="openStep2()" label="Back"
         style="min-height: 28px;padding: .25em 1em;"></button>
-      <button pButton type="button" label="Finish" (click)=" XLSTemplate ? saveWizardData(): showSavePopup()"
+      <button pButton type="button" label="Finish" (click)="showSavePopup()"
         style="min-height: 28px;padding: .25em 1em;"></button>
       <!-- </div> -->
 
-      <p-dialog header="Save Custom Report" [(visible)]="visible" [modal]="true" [responsive]="true"
-        [style]="{width: '350px', minWidth: '200px'}" [minY]="300" [maximizable]="false" [baseZIndex]="10000"
-        appendTo="body">
-        <div class="ui-g" style="text-align: center;">
-          <label>Report Name</label><br>
-          <input type="text" pInputText [(ngModel)]="_reportName" style="width: 80%;">
-        </div>
-        <br>
-
-        <div class="ui-g" style="text-align: center;">
-          <label>Report Description</label><br>
-          <textarea pInputTextarea [(ngModel)]="_reportDescription" style="width: 80%;"></textarea>
-        </div>
-        <br>
-        <div class="ui-g" style="text-align: center;">
-          <label>Report Group</label><br>
-          <p-dropdown [options]="reportGroup" [(ngModel)]="_reportGroup" [style]="{'width': '80%'}">
-          </p-dropdown>
-        </div>
-        <hr>
-        <div class="ui-g" style="text-align: center;">
-          <button pButton type="button" label="Save" (click)="saveWizardData()"></button>
-          <button pButton type="button" label="Cancel" (click)="visible = false"></button>
-        </div>
-      </p-dialog>
     </div>
   </p-footer>
 </p-panel>
+
+<p-dialog header="Save Custom Report" [(visible)]="visible" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [contentStyle]="{ overflow:'visible'}" [minY]="300"
+  [maximizable]="false" appendTo="body">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      Report Name
+      <input type="text" pInputText [(ngModel)]="_reportName">
+    </div>
+
+    <div class="ui-g-12">
+      Report Description
+      <textarea pInputTextarea [(ngModel)]="_reportDescription" autoResize="true" style="width: 100%;"></textarea>
+    </div>
+
+    <div class="ui-g-12">
+      Report Group
+      <p-dropdown [options]="reportGroup" [editable]="true" [(ngModel)]="_reportGroup">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <p-footer>
+    <button pButton type="button" label="Save" (click)="saveWizardData()"></button>
+    <button pButton type="button" label="Cancel" (click)="visible = false"></button>
+  </p-footer>
+
+</p-dialog>

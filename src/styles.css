@@ -1612,3 +1612,33 @@ button.ui-button.ui-state-active, .ui-button.ui-state-active {
 #monitorUpDownInfoDialog .ui-accordion .ui-accordion-header a {
   color: white;
 }
+
+.ui-inputgroup {
+    display: flex;
+}
+
+.ui-inputgroup .ui-inputgroup-addon:first-child {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.ui-inputgroup .ui-inputgroup-addon {
+    border-color: #a6a6a6;
+    background-color: #eaeaea;
+    color: #848484;
+    padding: 0.429em;
+    min-width: 2em;
+}
+
+.ui-inputgroup .ui-inputgroup-addon {
+    display: inline-block;
+    text-align: center;
+    min-width: 1.5em;
+    padding: .25em;
+    border-width: 1px;
+    border-style: solid;
+}

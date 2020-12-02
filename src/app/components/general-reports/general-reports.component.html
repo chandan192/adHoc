@@ -3,8 +3,9 @@
     <p-accordionTab header="Standard Reports" [selected]="true">
       <!-- Loader -->
       <app-loader [busy]="generalPanelItems.length == 0" [position]="'relative'" [h]="'250px'"></app-loader>
-      <p-tree [value]="generalPanelItems" selectionMode="single" (onNodeSelect)="nodeSelect($event, 'general')"
-        (mouseover)="getNodeTitle($event)" (mouseout)="removeNodeTitle()" title="{{nodeTitle}}">
+      <p-tree [value]="generalPanelItems" selectionMode="single" [filter]="true"
+        (onNodeSelect)="nodeSelect($event, 'general')" (mouseover)="getNodeTitle($event)" (mouseout)="removeNodeTitle()"
+        title="{{nodeTitle}}">
       </p-tree>
     </p-accordionTab>
     <p-accordionTab>

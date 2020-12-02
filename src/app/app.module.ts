@@ -39,12 +39,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 // spreadsheet
 import { SpreadsheetAllModule } from '@syncfusion/ej2-angular-spreadsheet';
-import { ExcelsheetComponent } from './components/excelsheet/excelsheet.component';
 import { AngularSplitModule } from 'angular-split';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ExcelReportComponent } from './components/excel-report/excel-report.component';
@@ -56,7 +57,6 @@ import { ExcelReportComponent } from './components/excel-report/excel-report.com
     GeneralReportChildComponent,
     AddCustomReportComponent,
     LoaderComponent,
-    ExcelsheetComponent,
     ExcelReportComponent,
 
   ],
@@ -97,6 +97,8 @@ import { ExcelReportComponent } from './components/excel-report/excel-report.com
     PanelMenuModule,
     TooltipModule,
     InputTextModule,
+    InputTextareaModule,
+    ConfirmDialogModule,
 
     // material
     MatSnackBarModule

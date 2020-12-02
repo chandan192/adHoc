@@ -1,24 +1,32 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SaveOptions, SpreadsheetComponent } from '@syncfusion/ej2-angular-spreadsheet';
-import { MenuItem, SelectItem } from 'primeng/api';
+import { SaveCompleteEventArgs, SaveOptions, SpreadsheetComponent } from '@syncfusion/ej2-angular-spreadsheet';
+import { SelectItem, TreeNode } from 'primeng/api';
 import SpreadsheetUtils, { Report } from './../../interfaces/spreadsheet-util';
 import { NvhttpService } from './../../services/nvhttp.service';
+import * as moment from 'moment';
+import 'moment-timezone';
+import { AppComponent } from './../../app.component';
+import { ConfirmationService } from 'primeng/api';
+import { BroadcastService } from 'src/app/services/broadcast.service';
 
 @Component({
   selector: 'app-excel-report',
   templateUrl: './excel-report.component.html',
-  styleUrls: ['./excel-report.component.css']
+  styleUrls: ['./excel-report.component.css'],
+  providers: [ConfirmationService]
 })
-export class ExcelReportComponent implements OnInit {
+
+export class ExcelReportComponent implements OnInit, AfterViewInit {
 
   @ViewChild('default', { static: false })
   public spreadsheetObj: SpreadsheetComponent;
   public data: any[] = [];
   // public openUrl = 'https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/open';
-  // public saveUrl = 'https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/save';
+  public saveUrl = 'https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/save';
   opened = true;
-  reports: MenuItem[] = [];
+  reports: TreeNode[] = [];
   display: boolean;
   templateReports: SelectItem[] = [];
   selectedTemplateReport: any;
@@ -28,25 +36,106 @@ export class ExcelReportComponent implements OnInit {
   selectedReport: Report;
   selectedReportColumns: string[] = [];
   showRename: boolean;  // to show the rename input box
-  reportName = 'Untitled Spreadsheet';
+  reportName = 'Untitled_Spreadsheet';
+  displayPreview: boolean;
+  lastTime: SelectItem[] = [
+    { label: 'Hour(s)', value: 'hours' },
+    { label: 'Day(s)', value: 'days' },
+    { label: 'Week(s)', value: 'weeks' },
+    { label: 'Month(s)', value: 'months' },
+    { label: 'Year(s)', value: 'years' }
+  ];
+  form: FormGroup;
+  maxDate: Date;
 
-  constructor(private http: NvhttpService, private router: Router) { }
+  constructor(private http: NvhttpService, private router: Router, private confirmationService: ConfirmationService, private trigger: BroadcastService) {
+    this.clearReport();
+  }
+
+  clearReport() {
+    const time = new Date().getTime();
+    const d = new Date(moment.tz(time, AppComponent.config.timeZone).format('MM/DD/YYYY HH:mm:ss'));
+    const startT: Date = new Date(d.toDateString() + ' 00:00:00');
+    const endT: Date = new Date(d.toDateString() + ' 23:59:00');
+    this.maxDate = new Date(d.toDateString() + ' 23:59:00');
+
+    this.form = new FormGroup({
+      timeFilter: new FormControl('true'),
+      lastTime: new FormControl('days'),
+      lastValue: new FormControl(1),
+      stime: new FormControl(startT),
+      etime: new FormControl(endT),
+    });
+  }
 
   ngOnInit() {
     // get report list
-    this.http.getGeneralReport().subscribe((response: any) => {
-      console.log(response);
+    this.loadPanelMenuData();
 
-      // get group from the report list
-      this.reports = this.showPanelMenu(response.standard);
-      console.log('reports -----', this.reports);
+
+    this.trigger.on('fileClicked').subscribe(() => {
+      let id = this.spreadsheetObj.element.id;
+
+      setTimeout(() => {
+        document.getElementById(id + '_Open').style.display = 'none';
+        document.getElementById(id + '_Save_As').classList.remove('e-disabled');
+
+        document.getElementById(id + '_Save_As').addEventListener('mouseenter', () => {
+          setTimeout(() => {
+
+            document.getElementById(id + '_Xlsx').children[0].addEventListener('click', (e: MouseEvent) => {
+              this.saveReport('Xlsx');
+              e.stopPropagation();
+            });
+
+            document.getElementById(id + '_Xls').children[0].addEventListener('click', (e: MouseEvent) => {
+              e.stopPropagation();
+              this.saveReport('Xls');
+            })
+            document.getElementById(id + '_Csv').style.display = 'none';
+          });
+        });
+
+      });
     });
 
   }
 
+  ngAfterViewInit() {
+    this.setFileOptions();
+  }
+
+  setFileOptions() {
+    setTimeout(() => {
+      let id = this.spreadsheetObj.element.id;
+      console.log('Workbook id : ', id);
+
+      document.getElementById(id + '_File').addEventListener('click', () => {
+        this.trigger.broadcast('fileClicked');
+      });
+
+
+    }, 1000);
+  }
+
+  loadPanelMenuData() {
+    this.http.getGeneralReport().subscribe((response: any) => {
+
+      let temp: any[] = response.standard;
+
+      const userName = sessionStorage.getItem('sesLoginName');
+      if (response.hasOwnProperty(userName)) {
+        temp = temp.concat(response[userName]);
+      }
+
+      this.reports = this.showPanelMenu(temp);
+
+    });
+  }
+
   showPanelMenu(jsonData) {
-    const panelItems: MenuItem[] = [];
-    let items: any;
+    const panelItems: TreeNode[] = [];
+    let items: TreeNode[];
     const group = [];
     // Removing duplicate group name from the record
     for (const i of jsonData) {
@@ -60,25 +149,22 @@ export class ExcelReportComponent implements OnInit {
     for (const i of group) {
       panelItems.push({
         label: i,
-        items: [] as MenuItem[],
+        expandedIcon: 'fa fa-folder-open',
+        collapsedIcon: 'fa fa-folder',
+        children: []
       });
     }
 
     for (let i = 0; i < group.length; i++) {
-      items = [] as MenuItem[];
-      panelItems[i].items = items;
+      items = [];
+      panelItems[i].children = items;
 
       for (const j of jsonData) {
         if (group[i] === j.group) {
           items.push({
             label: j.name,
+            icon: 'fa fa-file',
             data: j,
-            command: (event: any) => {
-              console.log('event.item.data - ', event.item.data);
-              console.log(this.spreadsheetObj);
-
-              this.dropReport(this.getReportDetails(event.item.data));
-            }
           });
         }
       }
@@ -106,6 +192,8 @@ export class ExcelReportComponent implements OnInit {
 
   dropReport(report: Report) {
     // get the selected cell index
+
+    console.log('SpreadSheet - :', this.spreadsheetObj);
     const activeCell = this.spreadsheetObj.getActiveSheet().activeCell;
     console.log({ activeCell });
 
@@ -136,6 +224,7 @@ export class ExcelReportComponent implements OnInit {
 
     setTimeout(() => {
       this.spreadsheetObj.refresh(false);
+      this.setFileOptions();
     }, 100);
   }
 
@@ -157,6 +246,9 @@ export class ExcelReportComponent implements OnInit {
     this.XLSTemplate = false;
 
     this.dropReport(this.getReportDetails(e));
+    //  refresh the report list
+    this.loadPanelMenuData();
+
 
   }
 
@@ -168,27 +260,41 @@ export class ExcelReportComponent implements OnInit {
 
   checkReportName() {
     if (this.reportName.trim() === '') {
-      this.reportName = 'Untitled Spreadsheet';
+      this.reportName = 'Untitled_Spreadsheet';
     }
 
     this.showRename = false;
   }
 
-  saveReport(): void {
+  saveReport(type): void {
     const url = this.http.getRequestUrl('/netvision/rest/webapi/adhocreporttemplateexport?access_token=563e412ab7f5a282c15ae5de1732bfd1');
     const fileName = this.reportName + '_' + new Date().getTime();
-    const saveOptions: SaveOptions = { url, fileName, saveType: 'Xls' };
+    const saveOptions: SaveOptions = { url, fileName, saveType: type };
 
     this.spreadsheetObj.save(saveOptions);
+
+    document.getElementById('control-section').click();
+
+
+    // let jsonObject = this.spreadsheetObj.saveAsJson();
+    //   jsonObject.__zone_symbol__value.jsonObject.Workbook
   }
 
-  deleteReport() {
-    alert('Report deleted');
-  }
 
-  createNewTemplate() {
-    // let options: ClearOptions = { type: 'Clear All' };
-    // this.spreadsheetObj.clear(options);
+
+  newWorkbook() {
+    this.confirmationService.confirm({
+      message: ' Are you sure you want to destroy the current workbook without saving and create a new workbook?',
+      accept: () => {
+        this.spreadsheetObj.sheets.length = 0;
+        this.spreadsheetObj.createSheet();
+        //dialogInst_1.hide();
+        this.spreadsheetObj.activeSheetIndex = this.spreadsheetObj.sheets.length - 1;
+        // this.spreadsheetObj.notify(refreshSheetTabs, {});
+        // this.spreadsheetObj.notify(sheetsDestroyed, {});
+        this.spreadsheetObj.renderModule.refreshSheet();
+      }
+    });
   }
 
   showTemplateReports() {
@@ -220,5 +326,34 @@ export class ExcelReportComponent implements OnInit {
     });
   }
 
+  previewReport(e: MouseEvent, report) {
+    this.displayPreview = true;
+
+  }
+
+  deleteReport(e: MouseEvent, report) {
+    e.stopPropagation();
+    alert('Report deleted');
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+  nodeSelect(e) {
+    console.log(e);
+    // disable parent node selection
+    if (e.node.parent) {
+      const data = e.node.data;
+
+      if (data.hasOwnProperty('columns')) {
+        this.dropReport(this.getReportDetails(data));
+
+      } else if (data.hasOwnProperty('columnDetails')) {
+        this.dropReport(this.getReportDetails(data));
+      }
+
+    }
+  }
 
 }
